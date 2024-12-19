@@ -6,6 +6,11 @@
       <list>
         <option value="$PROJECT_DIR$/config-server/pom.xml" />
         <option value="$PROJECT_DIR$/discover-server/pom.xml" />
+        <option value="$PROJECT_DIR$/manager/pom.xml" />
+        <option value="$PROJECT_DIR$/match/pom.xml" />
+        <option value="$PROJECT_DIR$/player/pom.xml" />
+        <option value="$PROJECT_DIR$/supporter/pom.xml" />
+        <option value="$PROJECT_DIR$/team/pom.xml" />
       </list>
     </option>
   </component>
