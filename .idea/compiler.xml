@@ -9,7 +9,7 @@
         <module name="config-server" />
         <module name="discover-server" />
       </profile>
-      <profile name="Annotation profile for tournament" enabled="true">
+      <profile name="Annotation profile for Train" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -21,18 +21,30 @@
         <module name="match" />
         <module name="tournament" />
         <module name="team" />
+        <module name="referee" />
         <module name="supporter" />
+        <module name="organizer" />
+        <module name="builder" />
+        <module name="stadium" />
+        <module name="injury" />
+        <module name="Train" />
         <module name="player" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Train" options="-parameters" />
+      <module name="builder" options="-parameters" />
       <module name="config-server" options="-parameters" />
       <module name="discover-server" options="-parameters" />
+      <module name="injury" options="-parameters" />
       <module name="manager" options="-parameters" />
       <module name="match" options="-parameters" />
+      <module name="organizer" options="-parameters" />
       <module name="player" options="-parameters" />
+      <module name="referee" options="-parameters" />
+      <module name="stadium" options="-parameters" />
       <module name="supporter" options="-parameters" />
       <module name="team" options="-parameters" />
       <module name="ticket" options="-parameters" />

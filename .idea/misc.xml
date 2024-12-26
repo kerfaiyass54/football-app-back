@@ -13,6 +13,12 @@
         <option value="$PROJECT_DIR$/team/pom.xml" />
         <option value="$PROJECT_DIR$/ticket/pom.xml" />
         <option value="$PROJECT_DIR$/tournament/pom.xml" />
+        <option value="$PROJECT_DIR$/referee/pom.xml" />
+        <option value="$PROJECT_DIR$/builder/pom.xml" />
+        <option value="$PROJECT_DIR$/injury/pom.xml" />
+        <option value="$PROJECT_DIR$/organizer/pom.xml" />
+        <option value="$PROJECT_DIR$/stadium/pom.xml" />
+        <option value="$PROJECT_DIR$/Train/pom.xml" />
       </list>
     </option>
   </component>
