@@ -1,99 +1,126 @@
+version: "3.8"
+
 services:
   postgresql:
-    container_name: ms_pg_sql
-    image: postgres
+    image: postgres:15
+    container_name: postgres
     environment:
-      POSTGRES_USER: yassine
-      POSTGRES_PASSWORD: yk2001
-      PGDATA: /data/postgres
-    volumes:
-      - postgres:/data/postgres
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: mydb
     ports:
       - "5432:5432"
-    networks:
-      - microservices-net
-    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
   pgadmin:
-    container_name: ms_pgadmin
-    image: dpage/pgadmin4
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin
     environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
-      PGADMIN_CONFIG_SERVER_MODE: 'False'
-    volumes:
-      - pgadmin:/var/lib/pgadmin
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
     ports:
-      - "5050:80"
-    networks:
-      - microservices-net
-    restart: unless-stopped
-
-  zipkin:
-    container_name: zipkin
-    image: openzipkin/zipkin
-    ports:
-      - "9411:9411"
-    networks:
-      - microservices-net
+      - "8080:80"
+    depends_on:
+      - postgresql
 
   mongodb:
-    image: mongo
-    container_name: mongo_db
+    image: mongo:6.0
+    container_name: mongodb
     ports:
-      - 27016:27017
+      - "27017:27017"
     volumes:
-      - mongo:/data
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=yassine
-      - MONGO_INITDB_ROOT_PASSWORD=yassine
+      - mongo_data:/data/db
 
-  mongo-express:
-    image: mongo-express
-    container_name: mongo_express
-    restart: always
-    ports:
-      - 8081:8081
+  mongodb-compass:
+    image: mongo-express:latest
+    container_name: mongodb_compass
     environment:
-      - ME_CONFIG_MONGODB_ADMINUSERNAME=yassine
-      - ME_CONFIG_MONGODB_ADMINPASSWORD=yassine
-      - ME_CONFIG_MONGODB_SERVER=mongodb
+      ME_CONFIG_MONGODB_SERVER: mongodb
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mongodb
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    container_name: kafka
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
 
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
     container_name: zookeeper
     environment:
-      ZOOKEEPER_SERVER_ID: 1
       ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
     ports:
-      - "22181:2181"
-    networks:
-      - microservices-net
-  kafka:
-    image: confluentinc/cp-kafka:latest
-    container_name: ms_kafka
+      - "2181:2181"
+
+  zipkin:
+    image: openzipkin/zipkin:latest
+    container_name: zipkin
     ports:
-      - "9092:9092"
-    depends_on:
-      - zookeeper
+      - "9411:9411"
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:21.1
+    container_name: keycloak
     environment:
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
-      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
-    networks:
-      - microservices-net
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres:5432/keycloak
+      KC_DB_USERNAME: admin
+      KC_DB_PASSWORD: admin
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    ports:
+      - "8082:8080"
+    depends_on:
+      - postgresql
 
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.10.1
+    container_name: elasticsearch
+    environment:
+      discovery.type: single-node
+      bootstrap.memory_lock: "true"
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - "9200:9200"
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
 
+  angular:
+    image: node:20
+    container_name: angular
+    working_dir: /usr/src/app
+    volumes:
+      - ./angular:/usr/src/app
+    ports:
+      - "4200:4200"
+    command: bash -c "npm install && npm start"
 
-networks:
-  microservices-net:
-    driver: bridge
+  springboot:
+    image: openjdk:20
+    container_name: springboot
+    working_dir: /usr/src/app
+    volumes:
+      - ./springboot:/usr/src/app
+    ports:
+      - "8083:8080"
+    command: bash -c "mvn clean spring-boot:run"
 
 volumes:
-  postgres:
-  pgadmin:
-  mongo:
+  postgres_data:
+  mongo_data:
+  elasticsearch_data:
