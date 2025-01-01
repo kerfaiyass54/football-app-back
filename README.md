@@ -16,7 +16,7 @@ Here are the main actors that will interact with the app:
 
 ## Entities
 This picture will represent the different entities that are present in this project:
-![Alt Text](untitled.png)
+![Alt Text](Untitled.png)
 
 ## Technologies
 Based on the complexity of the project, these are the choices for its development:
