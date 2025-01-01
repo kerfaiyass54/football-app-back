@@ -31,5 +31,9 @@ Based on the complexity of the project, these are the choices for its developmen
 
 ## Architecture 
 For this project, we adapted the microservices architecture for those reasons :
+- **Scalability** : Each service can be scaled independently based on demand.
+- **Flexibility** : Allows using different technologies for different services(like database type).
+- **Fault Tolerance** : Failure in one service doesn’t affect the whole system.
+- **Faster Development** : We can work independently on different services.
 
-## Guide
+
