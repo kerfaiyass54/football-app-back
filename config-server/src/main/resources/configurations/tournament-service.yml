@@ -1,0 +1,10 @@
+server:
+  port: 8056
+spring:
+  data:
+    mongodb:
+      username: admin
+      password: pass
+      host: localhost
+      port: 27017
+      database: tournament
