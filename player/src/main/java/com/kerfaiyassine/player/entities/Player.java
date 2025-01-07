@@ -16,7 +16,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Player {
 
     @Id
-    private String id;
+    private long id;
     private String name;
     private String nationality;
     private PlayerPosition position;
