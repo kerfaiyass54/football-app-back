@@ -28,6 +28,7 @@ Based on the complexity of the project, these are the choices for its developmen
 - **Zipkin** : A distributed tracing system for monitoring and troubleshooting microservices.
 - **Docker** : A containerization platform for packaging applications and their dependencies into portable containers.
 
+![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white) ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white) ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white) ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 
 ## Architecture 
 For this project, we adapted the microservices architecture for those reasons :
