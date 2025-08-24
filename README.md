@@ -12,7 +12,7 @@ Here are the main actors that will interact with the app:
 - **Manager** : He can check his team and its players information. Moreover, he is able to check the upcoming matches, set the lineup, make training sessions and check the injuries. In the end, he can change his carer by looking for another team.
 - **Organizer** : He can manage teams, tournaments and referees. He can also change the rules of each tournament or match.
 - **Team** : The whole team will be represented by an actor from which they can manage their players, transfers and manager. They can also check the tournaments they belong to especially when there is a group stage. Finally, they can check their results and their schedule.
-- **Builder** : He can build and manage difeerent stadiums and fields.
+- **Builder** : He can build and manage different stadiums and fields.
 
 ## Entities
 This picture will represent the different entities that are present in this project:
@@ -28,6 +28,7 @@ Based on the complexity of the project, these are the choices for its developmen
 - **Zipkin** : A distributed tracing system for monitoring and troubleshooting microservices.
 - **Docker** : A containerization platform for packaging applications and their dependencies into portable containers.
 
+![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white) ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white) ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white) ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 
 ## Architecture 
 For this project, we adapted the microservices architecture for those reasons :
