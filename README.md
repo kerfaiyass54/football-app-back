@@ -3,7 +3,7 @@
 -----------------------------------------------------------
 
 ## Introduction
-The aim of this project is to simulate the management of different football tournaments. It considers every part of each tournament starting from each team and its players and managers and going to supporters, stadiums buildes and organizers.
+The aim of this project is to simulate the management of different football tournaments. It considers every part of each tournament starting from each team and its players and managers and going to supporters, stadiums and fields builders and organizers.
 
 ## Actors
 Here are the main actors that will interact with the app:
@@ -27,6 +27,7 @@ Based on the complexity of the project, these are the choices for its developmen
 - **Zookeeper** : A centralized service for maintaining configuration, naming, and coordination for distributed systems.
 - **Zipkin** : A distributed tracing system for monitoring and troubleshooting microservices.
 - **Docker** : A containerization platform for packaging applications and their dependencies into portable containers.
+- **Keycloak**: A system that manages the authentication and authorizations for all the users.
 
 ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white) ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white) ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white) ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 
@@ -34,7 +35,8 @@ Based on the complexity of the project, these are the choices for its developmen
 For this project, we adapted the microservices architecture for those reasons :
 - **Scalability** : Each service can be scaled independently based on demand.
 - **Flexibility** : Allows using different technologies for different services(like database type).
-- **Fault Tolerance** : Failure in one service doesn’t affect the whole system.
+- **Fault tolerance** : Failure in one service doesn’t affect the whole system.
 - **Faster Development** : We can work independently on different services.
+
 
 
