@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="config-server" />
+        <module name="gateway" />
         <module name="discover-server" />
       </profile>
       <profile name="Annotation profile for tournament" enabled="true">
@@ -40,6 +41,7 @@
       <module name="builder" options="-parameters" />
       <module name="config-server" options="-parameters" />
       <module name="discover-server" options="-parameters" />
+      <module name="gateway" options="-parameters" />
       <module name="injury" options="-parameters" />
       <module name="manager" options="-parameters" />
       <module name="match" options="-parameters" />

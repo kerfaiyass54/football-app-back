@@ -19,6 +19,7 @@
         <option value="$PROJECT_DIR$/organizer/pom.xml" />
         <option value="$PROJECT_DIR$/stadium/pom.xml" />
         <option value="$PROJECT_DIR$/Train/pom.xml" />
+        <option value="$PROJECT_DIR$/gateway/pom.xml" />
       </list>
     </option>
   </component>
