@@ -30,5 +30,5 @@ public class Organizer {
 
 
     @Column(name="name", nullable = false, unique = true)
-    private String Name;
+    private String name;
 }
