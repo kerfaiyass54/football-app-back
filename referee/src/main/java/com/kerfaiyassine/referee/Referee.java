@@ -22,4 +22,8 @@ public class Referee {
 
     @Column(name="nationality", nullable = false)
     private String nationality;
+
+    @Column(name="organizer_id", nullable = false)
+    private long organizerId;
+
 }
