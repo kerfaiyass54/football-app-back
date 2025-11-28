@@ -1,8 +1,17 @@
 package com.kerfaiyassine.referee.entities;
 
 
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -10,6 +19,7 @@ import lombok.*;
 @Getter
 @Setter
 @Entity
+@Table(name="referee")
 public class Referee {
 
     @Id
