@@ -14,7 +14,9 @@ Here are the main actors that will interact with the app:
 - **Team** : The whole team will be represented by an actor from which they can manage their players, transfers and manager. They can also check the tournaments they belong to especially when there is a group stage. Finally, they can check their results and their schedule.
 - **Builder** : He can build and manage different stadiums and fields.
 - **Supporter**: He can buy tickets and he can check the results and the different information.
-** Each user can manage his own data and check hthe permissions he has**
+
+
+**Each user can manage his own data and check hthe permissions he has.**
 
 ## Entities
 This picture will represent the different entities that are present in this project:
