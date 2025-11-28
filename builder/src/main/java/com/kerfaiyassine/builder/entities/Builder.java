@@ -2,7 +2,14 @@ package com.kerfaiyassine.builder.entities;
 
 
 import com.kerfaiyassine.builder.enums.Expertise;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.EnumType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +20,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+@Table(name="builder")
 public class Builder {
 
     @Id
