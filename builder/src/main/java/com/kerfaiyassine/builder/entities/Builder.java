@@ -1,6 +1,7 @@
 package com.kerfaiyassine.builder.entities;
 
 
+import com.kerfaiyassine.builder.enums.Expertise;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,7 +27,8 @@ public class Builder {
     private String nationality;
 
     @Column(name="expertise")
-    private String expertise;
+    @Enumerated(EnumType.STRING)
+    private Expertise expertise;
 
     @Column(name="year_established")
     private int yearEstablished;
