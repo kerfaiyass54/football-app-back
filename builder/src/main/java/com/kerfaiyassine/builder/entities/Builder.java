@@ -1,4 +1,4 @@
-package com.kerfaiyassine.builder;
+package com.kerfaiyassine.builder.entities;
 
 
 import jakarta.persistence.*;
