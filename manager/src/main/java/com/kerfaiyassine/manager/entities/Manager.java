@@ -17,7 +17,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Builder
 @Getter
 @Setter
-@Document(collection = "player")
+@Document(collection = "manager")
 public class Manager {
 
     @Id
