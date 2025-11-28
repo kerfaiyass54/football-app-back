@@ -5,7 +5,6 @@ import com.kerfaiyassine.player.enums.PlayerPosition;
 import com.kerfaiyassine.player.enums.PlayerSituation;
 import lombok.*;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
@@ -25,10 +24,12 @@ public class Player {
     private PlayerPosition position;
     private double ability;
     private int age;
-    private PlayerSituation situation;
+    private PlayerSituation status;
     private double marketValue;
-
-    @DBRef
-    private List<Contract> contracts;
+    private String lineup;
+    private int number;
+    private List<Long> contracts;
+    private double height;
+    private double weight;
 
 }
