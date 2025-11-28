@@ -1,5 +1,5 @@
 package com.kerfaiyassine.player.enums;
 
 public enum PlayerPosition {
-    GOALKEEPER,RIGHT_BACK,LEFT_BACK,CENTRAL_BACK,MIDFIELDER,ATTACKER,PLAYMAKER
+    GK,RB,LB,CB,SW,CM,CDM,CAM,LMF,RMF,ST,CF,SS,LWF,RWF
 }

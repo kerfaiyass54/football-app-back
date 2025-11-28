@@ -26,7 +26,7 @@ public class Player {
     private int age;
     private PlayerSituation status;
     private double marketValue;
-    private String lineup;
+    private PlayerSituation lineup;
     private int number;
     private List<Long> contracts;
     private double height;
