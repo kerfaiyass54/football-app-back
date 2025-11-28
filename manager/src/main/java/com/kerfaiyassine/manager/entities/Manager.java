@@ -10,6 +10,8 @@ import lombok.Builder;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 
 @Data
 @AllArgsConstructor
@@ -26,4 +28,5 @@ public class Manager {
     private int age;
     private String status;
     private String nationality;
+    private List<Long> careers;
 }

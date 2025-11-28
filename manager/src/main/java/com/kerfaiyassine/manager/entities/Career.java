@@ -25,6 +25,8 @@ public class Career {
     private int yearStart;
     private String status;
     private boolean renewable;
+    private long  careerId;
+    private long teamId;
 
 
 }
