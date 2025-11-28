@@ -20,7 +20,7 @@ import lombok.ToString;
 public class Team {
 
     @Id
-    private String id;
+    private long id;
     private String name;
     private int establishYear;
     private int rank;
