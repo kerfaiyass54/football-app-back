@@ -1,4 +1,4 @@
-package com.kerfaiyassine.referee;
+package com.kerfaiyassine.referee.entities;
 
 
 import jakarta.persistence.*;
