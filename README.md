@@ -12,16 +12,25 @@ A comprehensive **Spring Boot microservices** architecture for managing all aspe
 
 ## ✨ Features
 
-✅ **Modular Microservices Architecture** - Each domain has its own service (Teams, Players, Matches, etc.)
-✅ **Multi-Database Support** - PostgreSQL for relational data, MongoDB for flexible document storage
-✅ **Authentication & Authorization** - Secure with Keycloak integration
-✅ **Event-Driven Architecture** - Built with Spring Cloud Stream for real-time updates
-✅ **Service Discovery** - Eureka server for dynamic service registration
-✅ **API Gateway** - Unified entry point with routing and security
-✅ **Configuration Management** - Centralized configuration with Config Server
-✅ **Monitoring & Tracing** - Zipkin integration for distributed tracing
-✅ **Dockerized** - Complete containerized deployment with Docker Compose
-✅ **Comprehensive CRUD Operations** - Full support for all football management operations
+✅ **Modular Microservices Architecture** - Each domain has its own service (Teams, Players, Matches, etc.).
+
+✅ **Multi-Database Support** - PostgreSQL for relational data, MongoDB for flexible document storage.
+
+✅ **Authentication & Authorization** - Secure with Keycloak integration.
+
+✅ **Event-Driven Architecture** - Built with Spring Cloud Stream for real-time updates.
+
+✅ **Service Discovery** - Eureka server for dynamic service registration.
+
+✅ **API Gateway** - Unified entry point with routing and security.
+
+✅ **Configuration Management** - Centralized configuration with Config Server.
+
+✅ **Monitoring & Tracing** - Zipkin integration for distributed tracing.
+
+✅ **Dockerized** - Complete containerized deployment with Docker Compose.
+
+✅ **Comprehensive CRUD Operations** - Full support for all football management operations.
 
 ---
 
