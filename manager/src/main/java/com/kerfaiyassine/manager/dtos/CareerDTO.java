@@ -9,8 +9,9 @@ import lombok.*;
 @Setter
 public class CareerDTO {
 
-    private long careerId;
+    private long managerId;
     private long teamId;
     private int duration;
     private boolean renewable;
+    private int yearStart;
 }

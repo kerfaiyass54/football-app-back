@@ -14,4 +14,6 @@ public class ContractsDTO {
     private int yearStart;
     private CareerStatus status;
     private boolean renewable;
+    private long managerId;
+    private long teamId;
 }
