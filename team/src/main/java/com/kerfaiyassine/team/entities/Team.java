@@ -1,5 +1,6 @@
 package com.kerfaiyassine.team.entities;
 
+import com.kerfaiyassine.team.enums.TeamStatus;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -25,5 +26,6 @@ public class Team {
     private int establishYear;
     private int rank;
     private String city;
-    private String status;
+    private TeamStatus status;
+    private int budget;
 }
