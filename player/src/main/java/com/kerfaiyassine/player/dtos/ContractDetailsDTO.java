@@ -18,4 +18,6 @@ public class ContractDetailsDTO {
     private ContractStatus contractStatus;
     private String playerName;
     private String teamName;
+    private int price;
+    private int salary;
 }

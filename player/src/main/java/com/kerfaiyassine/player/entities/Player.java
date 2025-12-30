@@ -31,7 +31,7 @@ public class Player {
     private String nationality;
     private PlayerPosition position;
     private double ability;
-    private int age;
+    private int yearOfBirth;
     private PlayerStatus status;
     private double marketValue;
     private PlayerSituation lineup;

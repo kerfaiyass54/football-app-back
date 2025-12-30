@@ -14,5 +14,7 @@ public class ContractDTO {
     private boolean renewable;
     private String name;
     private String team;
+    private int price;
+    private int salary;
 
 }

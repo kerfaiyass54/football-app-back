@@ -24,4 +24,6 @@ public class Contract {
     private ContractStatus contractStatus;
     private long teamId;
     private long playerId;
+    private int price;
+    private int salary;
 }

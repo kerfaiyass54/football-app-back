@@ -20,4 +20,6 @@ public class PlayerDTO {
     private String team;
     private PlayerSituation situation;
     private double marketValue;
+    private double height;
+    private double weight;
 }

@@ -11,9 +11,10 @@ import lombok.*;
 @Setter
 public class PlayerCreationDTO {
     private String name;
-    private int age;
+    private int yearOfBirth;
     private String nationality;
     private PlayerPosition position;
     private double ability;
-
+    private double height;
+    private double weight;
 }
