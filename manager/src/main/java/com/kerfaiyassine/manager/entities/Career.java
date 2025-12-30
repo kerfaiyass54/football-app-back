@@ -1,6 +1,7 @@
 package com.kerfaiyassine.manager.entities;
 
 
+import com.kerfaiyassine.manager.enums.CareerStatus;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
@@ -23,9 +24,9 @@ public class Career {
     private long id;
     private int duration;
     private int yearStart;
-    private String status;
+    private CareerStatus status;
     private boolean renewable;
-    private long  careerId;
+    private long careerId;
     private long teamId;
 
 

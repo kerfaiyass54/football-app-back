@@ -1,6 +1,7 @@
 package com.kerfaiyassine.manager.entities;
 
 
+import com.kerfaiyassine.manager.enums.ManagerStatus;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
@@ -25,8 +26,8 @@ public class Manager {
     @Id
     private long id;
     private String name;
-    private int age;
-    private String status;
+    private int yearOfBirth;
+    private ManagerStatus status;
     private String nationality;
     private List<Long> careers;
 }
