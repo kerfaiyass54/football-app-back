@@ -1,9 +1,9 @@
 
 # Football Management Microservices Backend 🏟️🔥
 
-![GitHub Stars](https://img.shields.io/github/stars/yourusername/football-app-back?style=social)
-![GitHub Forks](https://img.shields.io/github/forks/yourusername/football-app-back?style=social)
-![Java CI](https://github.com/yourusername/football-app-back/actions/workflows/java-ci.yml/badge.svg)
+![GitHub Stars](https://img.shields.io/github/stars/kerfaiyass54/football-app-back?style=social)
+![GitHub Forks](https://img.shields.io/github/forks/kerfaiyass54/football-app-back?style=social)
+![Java CI](https://github.com/kerfaiyass54/football-app-back/actions/workflows/java-ci.yml/badge.svg)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
 A comprehensive **Spring Boot microservices** architecture for managing all aspects of football tournaments, teams, players, and events. This backend system provides a robust foundation for building a complete football management platform with support for all key stakeholders.
@@ -69,7 +69,7 @@ Before you begin, ensure you have the following installed:
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/football-app-back.git
+   git clone https://github.com/kerfaiyass54/football-app-back.git
    cd football-app-back
    ```
 
@@ -139,7 +139,7 @@ We welcome contributions from the community! Here's how you can get involved:
 
 1. **Fork the repository**:
    ```bash
-   git clone https://github.com/yourusername/football-app-back.git
+   git clone https://github.com/kerfaiyass54/football-app-back.git
    cd football-app-back
    ```
 
@@ -185,7 +185,7 @@ If you encounter any problems or have feature requests, please open an issue on 
 
 ### Getting Help
 
-- **Discussions**: Join our [GitHub Discussions](https://github.com/yourusername/football-app-back/discussions)
+- **Discussions**: Join our [GitHub Discussions](https://github.com/kerfaiyass54/football-app-back/discussions)
 - **Community Slack**: [Join our Slack channel](https://join.slack.com/t/footballapp)
 - **Email**: contact@footballapp.com
 
