@@ -29,7 +29,7 @@ public class ManagerController {
         return ResponseEntity.ok(managerStatusDTOPage);
     }
 
-    @GetMapping("/{nationality}")
+    @GetMapping("/nationality/{nationality}")
     public ResponseEntity<Page<ManagerDTO>> getManagersByNationality(@PathVariable String nationality, @RequestParam(defaultValue = "0") int page,
                                                                      @RequestParam(defaultValue = "5") int size){
         Page<ManagerDTO> managers = managerService.getManagersByNationality(nationality, page, size);

@@ -29,25 +29,25 @@ public class BuilderController {
         return new ResponseEntity<>(builder, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<BuilderDTO> getBuilder(@PathVariable Integer id){
         BuilderDTO builderDTO = builderService.getBuilderById(id);
         return new ResponseEntity<>(builderDTO, HttpStatus.OK);
     }
 
-    @GetMapping("/{nationality}")
+    @GetMapping("/nationality/{nationality}")
     public ResponseEntity<List<BuilderDTO>> getBuildersByNationality(@PathVariable String nationality){
         List<BuilderDTO> builders = builderService.getBuilderByNationality(nationality);
         return new ResponseEntity<>(builders, HttpStatus.OK);
     }
 
-    @GetMapping("/{expertise}")
+    @GetMapping("/expertise/{expertise}")
     public ResponseEntity<List<BuilderDTO>> getBuildersByExpertise(@PathVariable Expertise expertise){
         List<BuilderDTO> builders = builderService.getBuilderByExpertise(expertise);
         return new ResponseEntity<>(builders, HttpStatus.OK);
     }
 
-    @PutMapping("/{id}/{price}")
+    @PutMapping("/price/{id}/{price}")
     public ResponseEntity<Void> updateBuilder(@PathVariable Integer id, @PathVariable Integer price){
         builderService.updateBuilderPrice(id, price);
         return new ResponseEntity<>(HttpStatus.OK);
