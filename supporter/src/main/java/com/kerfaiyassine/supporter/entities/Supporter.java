@@ -24,9 +24,9 @@ import java.util.List;
 public class Supporter {
 
     @Id
-    private long id;
+    private String id;
     private String name;
     private String nationality;
-    private long locationId;
+    private String locationId;
 
 }
