@@ -7,6 +7,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Builder;
@@ -19,7 +21,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name="referee")
+@Table(name="referees")
 public class Referee {
 
     @Id
@@ -27,12 +29,17 @@ public class Referee {
     @Column(name="id")
     private Integer Id;
 
+    @NotBlank
+    @Size(max = 100)
     @Column(name="name", nullable = false, unique = true)
     private String name;
 
+    @NotBlank
+    @Size(max = 50)
     @Column(name="nationality", nullable = false)
     private String nationality;
 
+    @NotBlank
     @Column(name="organizer_id", nullable = false)
     private long organizerId;
 

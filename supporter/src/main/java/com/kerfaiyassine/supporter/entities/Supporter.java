@@ -3,6 +3,8 @@ package com.kerfaiyassine.supporter.entities;
 
 
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
@@ -14,19 +16,26 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.List;
 
 
-@Data
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Getter
 @Setter
-@Document(collection = "supporter")
+@Document(collection = "supporters")
 public class Supporter {
 
     @Id
     private String id;
+
+    @NotBlank
+    @Size(min = 1, max = 25)
     private String name;
+
+    @NotBlank
+    @Size(min = 1, max = 25)
     private String nationality;
+
     private String locationId;
 
 }

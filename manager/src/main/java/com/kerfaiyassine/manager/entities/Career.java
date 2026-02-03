@@ -2,31 +2,44 @@ package com.kerfaiyassine.manager.entities;
 
 
 import com.kerfaiyassine.manager.enums.CareerStatus;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
-import lombok.Setter;
 import lombok.Getter;
-import lombok.Builder;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
+
 @Getter
 @Setter
-@Document(collection = "career")
+@AllArgsConstructor
+@NoArgsConstructor
+@Document(collection = "careers")
 public class Career {
 
     @Id
-    private long id;
-    private int duration;
-    private int yearStart;
+    private String id;
+
+    @Positive
+    private int durationInYears;
+
+    @NotNull
+    @Min(1950)
+    private Integer yearStart;
+
+    @NotNull
     private CareerStatus status;
-    private boolean renewable;
-    private long managerId;
+
+
+    private Boolean renewable;
+
+    @NotNull
+    private Long managerId;
+
+    @NotNull
     private long teamId;
 
 

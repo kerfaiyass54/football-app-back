@@ -7,6 +7,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Builder;
@@ -22,15 +24,17 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "organizer")
+@Table(name = "organizers")
 public class Organizer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    private Integer Id;
+    private Integer id;
 
 
+    @NotBlank
+    @Size(max = 100)
     @Column(name="name", nullable = false, unique = true)
     private String name;
 }

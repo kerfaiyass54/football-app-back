@@ -4,7 +4,10 @@ package com.kerfaiyassine.player.entities;
 import com.kerfaiyassine.player.enums.PlayerPosition;
 import com.kerfaiyassine.player.enums.PlayerSituation;
 import com.kerfaiyassine.player.enums.PlayerStatus;
-import lombok.Data;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import lombok.Setter;
@@ -16,28 +19,61 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.List;
 
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Getter
 @Setter
-@Document(collection = "player")
+@Document(collection = "players")
 public class Player {
 
     @Id
-    private long id;
+    private String id;
+
+    @NotNull
+    @NotBlank
+    @Size(max = 100)
     private String name;
+
+    @NotNull
+    @NotBlank
+    @Size(max = 50)
     private String nationality;
+
+    @NotNull
     private PlayerPosition position;
-    private double ability;
-    private int yearOfBirth;
+
+    @NotNull
+    @Min(50)
+    private Integer ability;
+
+    @NotNull
+    @Min(1980)
+    private Integer yearOfBirth;
+
+    @NotNull
     private PlayerStatus status;
+
+    @NotNull
+    @Min(0)
     private double marketValue;
+
+    @NotNull
     private PlayerSituation lineup;
+
+    @NotNull
+    @Min(1)
     private int number;
-    private List<Long> contracts;
+
+
+    private List<String> contracts;
+
+    @NotNull
+    @Min(165)
     private double height;
+
+    @NotNull
+    @Min(65)
     private double weight;
 
 }

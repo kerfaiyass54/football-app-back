@@ -10,39 +10,53 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.EnumType;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+
+
+import java.math.BigDecimal;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 @Entity
-@Table(name="builder")
+@Table(name="builders")
 public class Builder {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    private Integer Id;
+    private Integer id;
 
+    @NotBlank
+    @Size(max = 100)
     @Column(name="name", nullable = false, unique = true)
     private String name;
 
+    @NotBlank
+    @Size(max = 50)
     @Column(name="nationality", nullable = false)
     private String nationality;
 
-    @Column(name="expertise")
+    @Column(name="expertise", nullable = false)
     @Enumerated(EnumType.STRING)
     private Expertise expertise;
 
+    @Min(1950)
     @Column(name="year_established")
-    private int yearEstablished;
+    private Integer yearEstablished;
 
-    @Column(name="price", nullable = false)
-    private int price;
+    @NotNull
+    @PositiveOrZero
+    @Column(nullable = false)
+    private BigDecimal price;
+
 
 
 

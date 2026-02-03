@@ -1,6 +1,10 @@
 package com.kerfaiyassine.team.entities;
 
 import com.kerfaiyassine.team.enums.TeamStatus;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -11,21 +15,40 @@ import lombok.Setter;
 import lombok.ToString;
 
 
-@Data
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @ToString
-@Document(collection = "team")
+@Document(collection = "teams")
 public class Team {
 
     @Id
     private long id;
+
+    @NotBlank
+    @Size(max = 100)
     private String name;
+
+    @NotBlank
+    @Min(1890)
     private int establishYear;
+
+
+    @NotBlank
+    @Min(1)
     private int rank;
+
+    @NotBlank
+    @NotNull
     private String city;
+
+    @NotBlank
+    @NotNull
     private TeamStatus status;
+
+    @NotBlank
+    @Min(25)
     private int budget;
 }
