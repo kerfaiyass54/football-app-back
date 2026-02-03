@@ -1,82 +1,97 @@
+version: "3.9"
 services:
-  keycloak:
-    image: quay.io/keycloak/keycloak:25.0
+  postgres:
+    image: postgres:16
+    container_name: postgres_db
     environment:
-        KC_HOSTNAME: localhost
-        KC_HOSTNAME_PORT: 7080
-        KC_HOSTNAME_STRICT_BACKCHANNEL: "true"
-        KEYCLOAK_ADMIN: admin
-        KEYCLOAK_ADMIN_PASSWORD: admin
-        KC_LOG_LEVEL: info
-    ports:
-      - "7080:7080"
-      - "7443:7443"
-    networks:
-        - env_network
-    command: ["start-dev", "--http-port", "7080", "--https-port", "7443"]
-
-  postgresql:
-    container_name: ms_pg_sql
-    image: postgres
-    environment:
+      POSTGRES_DB: keycloak
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
-      PGDATA: /data/postgres
     volumes:
-      - postgres:/data/postgres
+      - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     networks:
       - env_network
     restart: unless-stopped
+  keycloak:
+    image: quay.io/keycloak/keycloak:25.0
+    container_name: keycloak
+    depends_on:
+      - postgres
+    environment:
+      KC_DB: postgres
+      KC_DB_URL_HOST: postgres
+      KC_DB_URL_PORT: 5432
+      KC_DB_URL_DATABASE: keycloak
+      KC_DB_USERNAME: admin
+      KC_DB_PASSWORD: admin
+
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+
+      KC_HOSTNAME: localhost
+      KC_HTTP_PORT: 7080
+      KC_LOG_LEVEL: info
+    command: ["start-dev"]
+    ports:
+      - "7080:7080"
+    networks:
+      - env_network
+    restart: unless-stopped
 
   pgadmin:
-    container_name: ms_pgadmin
     image: dpage/pgadmin4
+    container_name: pgadmin
     environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
-      PGADMIN_CONFIG_SERVER_MODE: 'False'
+      PGADMIN_DEFAULT_EMAIL: admin@pgadmin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: "False"
     volumes:
-      - pgadmin:/var/lib/pgadmin
+      - pgadmin_data:/var/lib/pgadmin
     ports:
       - "5050:80"
     networks:
       - env_network
     restart: unless-stopped
 
-
-
-
   mongodb:
-    image: mongo
+    image: mongo:7
     container_name: mongo_db
-    ports:
-      - 27017:27017
-    volumes:
-      - mongo:/data
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=admin
-      - MONGO_INITDB_ROOT_PASSWORD=admin
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+    volumes:
+      - mongo_data:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - env_network
+    restart: unless-stopped
 
   mongo-express:
-      image: mongo-express
-      container_name: mongo_express
-      restart: always
-      ports:
-        - 8081:8081
-      environment:
-        - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
-        - ME_CONFIG_MONGODB_ADMINPASSWORD=admin
-        - ME_CONFIG_MONGODB_SERVER=mongodb
-
+    image: mongo-express
+    container_name: mongo_express
+    depends_on:
+      - mongodb
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: admin
+      ME_CONFIG_MONGODB_SERVER: mongodb
+    ports:
+      - "8081:8081"
+    networks:
+      - env_network
+    restart: unless-stopped
 
 networks:
   env_network:
     driver: bridge
 
 volumes:
-  postgres:
-  mongo:
-  pgadmin:
-
+  postgres_data:
+    external: true
+  pgadmin_data:
+    external: true
+  mongo_data:
+    external: true
