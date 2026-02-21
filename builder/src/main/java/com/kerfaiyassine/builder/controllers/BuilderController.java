@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -48,7 +49,7 @@ public class BuilderController {
     }
 
     @PutMapping("/price/{id}/{price}")
-    public ResponseEntity<Void> updateBuilder(@PathVariable Integer id, @PathVariable Integer price){
+    public ResponseEntity<Void> updateBuilder(@PathVariable Integer id, @PathVariable BigDecimal price){
         builderService.updateBuilderPrice(id, price);
         return new ResponseEntity<>(HttpStatus.OK);
     }

@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -54,7 +55,7 @@ public class BuilderService {
         return builderRepository.findBuildersByExpertise(expertise).stream().map(this::mapToDTO).toList();
     }
 
-    public void updateBuilderPrice(Integer id, int price) {
+    public void updateBuilderPrice(Integer id, BigDecimal price) {
         Builder builder = builderRepository.findBuilderById(id);
         builder.setPrice(price);
         builderRepository.save(builder);

@@ -85,7 +85,7 @@ Before you begin, ensure you have the following installed:
 
 4. **Access the services**:
    - Keycloak Admin Console: [http://localhost:7080](http://localhost:7080)
-   - PostgreSQL: [http://localhost:5432](http://localhost:5432) (via pgAdmin at [http://localhost:5050](http://localhost:5050))
+   - PostgreSQL: [http://localhost:5433](http://localhost:5433) (via pgAdmin at [http://localhost:5050](http://localhost:5050))
    - MongoDB: [http://localhost:27017](http://localhost:27017) (via Mongo Express at [http://localhost:8081](http://localhost:8081))
    - API Gateway: [http://localhost:8080](http://localhost:8080)
 
@@ -100,7 +100,7 @@ Before you begin, ensure you have the following installed:
 | `SPRING_PROFILES_ACTIVE`     | Active Spring profiles               | `dev`         |
 | `KEYCLOAK_URL`               | Keycloak server URL                  | `http://localhost:7080` |
 | `EUREKA_CLIENT_SERVICEURL_DEFAULTZONE` | Eureka server URL | `http://localhost:8761/eureka/` |
-| `DATABASE_URL`               | Database connection URL              | `jdbc:postgresql://localhost:5432/football` |
+| `DATABASE_URL`               | Database connection URL              | `jdbc:postgresql://localhost:5433/football` |
 
 ### Configuration Files
 
