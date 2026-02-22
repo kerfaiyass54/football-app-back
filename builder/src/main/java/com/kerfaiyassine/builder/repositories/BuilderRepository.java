@@ -17,4 +17,6 @@ public interface BuilderRepository extends JpaRepository<Builder, Integer> {
     public List<Builder> findBuildersByExpertise(Expertise expertise);
 
     public Page<Builder> findAll(Pageable pageable);
+
+    long countByExpertise(Expertise expertise);
 }

@@ -2,6 +2,8 @@ package com.kerfaiyassine.builder.services;
 
 
 import com.kerfaiyassine.builder.DTOs.BuilderDTO;
+import com.kerfaiyassine.builder.DTOs.ExpertiseStats;
+import com.kerfaiyassine.builder.DTOs.YearsMAxMin;
 import com.kerfaiyassine.builder.entities.Builder;
 import com.kerfaiyassine.builder.enums.Expertise;
 import com.kerfaiyassine.builder.repositories.BuilderRepository;
@@ -13,7 +15,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -65,6 +71,53 @@ public class BuilderService {
         Pageable pageable = PageRequest.of(page, size);
         return builderRepository.findAll(pageable).map(this::mapToDTO);
     }
+
+    public ExpertiseStats countBuilders(Expertise expertise) {
+
+        long count = builderRepository.countByExpertise(expertise);
+
+        return new ExpertiseStats(expertise, (int) count);
+    }
+
+    public YearsMAxMin getYoungestAndOldest() {
+
+        List<Integer> years = builderRepository.findAll()
+                .stream()
+                .map(Builder::getYearEstablished)
+                .toList();
+
+        YearsMAxMin result = new YearsMAxMin();
+
+        if (years.isEmpty()) {
+            result.setMinYear(0);
+            result.setMaxYear(0);
+            return result;
+        }
+
+        result.setMinYear(Collections.min(years));
+        result.setMaxYear(Collections.max(years));
+
+        return result;
+    }
+
+    public String getMostNationality() {
+
+        return builderRepository.findAll()
+                .stream()
+                .collect(Collectors.groupingBy(
+                        Builder::getNationality,
+                        Collectors.counting()
+                ))
+                .entrySet()
+                .stream()
+                .max(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey)
+                .orElse("N/A");
+    }
+
+
+
+
 
 
 

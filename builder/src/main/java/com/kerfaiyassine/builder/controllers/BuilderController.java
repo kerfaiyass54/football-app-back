@@ -2,6 +2,8 @@ package com.kerfaiyassine.builder.controllers;
 
 
 import com.kerfaiyassine.builder.DTOs.BuilderDTO;
+import com.kerfaiyassine.builder.DTOs.ExpertiseStats;
+import com.kerfaiyassine.builder.DTOs.YearsMAxMin;
 import com.kerfaiyassine.builder.entities.Builder;
 import com.kerfaiyassine.builder.enums.Expertise;
 import com.kerfaiyassine.builder.services.BuilderService;
@@ -60,6 +62,33 @@ public class BuilderController {
         Page<BuilderDTO> builders = builderService.getAllBuilders(page, size);
         return new ResponseEntity<>(builders, HttpStatus.OK);
     }
+
+
+    @GetMapping("/stats/{expertise}")
+    public ResponseEntity<ExpertiseStats> countBuilders(@PathVariable String expertise) {
+
+        try {
+            Expertise exp = Expertise.valueOf(expertise.toUpperCase());
+            ExpertiseStats stats = builderService.countBuilders(exp);
+            return new ResponseEntity<>(stats, HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/years")
+    public ResponseEntity<YearsMAxMin> getYoungestAndOldest(){
+        YearsMAxMin yearsMAxMin = builderService.getYoungestAndOldest();
+        return new ResponseEntity<>(yearsMAxMin, HttpStatus.OK);
+    }
+
+    @GetMapping("/nations")
+    public ResponseEntity<String> getNations(){
+        String nationality = builderService.getMostNationality();
+        return new ResponseEntity<>(nationality, HttpStatus.OK);
+    }
+
+
 
 
 
