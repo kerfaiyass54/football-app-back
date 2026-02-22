@@ -88,6 +88,12 @@ public class BuilderController {
         return new ResponseEntity<>(nationality, HttpStatus.OK);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteBuilder(@PathVariable Integer id){
+        builderService.deleteBuilder(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 
 
 

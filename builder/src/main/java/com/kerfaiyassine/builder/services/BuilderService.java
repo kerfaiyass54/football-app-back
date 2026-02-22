@@ -15,10 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -113,6 +110,14 @@ public class BuilderService {
                 .max(Map.Entry.comparingByValue())
                 .map(Map.Entry::getKey)
                 .orElse("N/A");
+    }
+
+
+    public void deleteBuilder(Integer id) {
+        Optional<Builder> optional = builderRepository.findById(id);
+        if (optional.isPresent()) {
+            builderRepository.deleteById(id);
+        }
     }
 
 
