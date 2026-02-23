@@ -13,7 +13,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -60,19 +62,14 @@ public class ManagerService {
         return managerRepository.findAll(pageable).map(this::mapToDTO);
     }
 
-    public ManagerDTO getManager(long id){
-        Optional<Manager> manager = managerRepository.findById(id);
-        if (manager.isPresent()) {
-            return mapToDTO(manager.get());
-        }
-        return null;
+    public ManagerDTO getManager(String id){
+        return mapToDTO(managerRepository.findManagerById(id));
     }
 
-    public void changeStatus(long id, ManagerStatus managerStatus) {
-        Optional<Manager> manager = managerRepository.findById(id);
-        if (manager.isPresent()) {
-            manager.get().setStatus(managerStatus);
-        }
+    public void changeStatus(String id, ManagerStatus managerStatus) {
+        Manager manager = managerRepository.findManagerById(id);
+        manager.setStatus(managerStatus);
+        managerRepository.save(manager);
     }
 
     public Page<ManagerDTO> getManagersByNationality(String nationality, int size, int page) {
@@ -84,6 +81,21 @@ public class ManagerService {
     public Page<ManagerStatusDTO> getManagersWithStatus(int size, int page){
         Pageable pageable = PageRequest.of(page, size);
         return managerRepository.findAll(pageable).map(this::mapToStatusDTO);
+    }
+
+    public Integer numberOfManagerByStatus(ManagerStatus managerStatus) {
+        return managerRepository.findManagersByStatus(managerStatus).size();
+    }
+
+    public Map<ManagerStatus, Integer> countManagersGroupedByStatus() {
+
+        Map<ManagerStatus, Integer> result = new EnumMap<>(ManagerStatus.class);
+
+        for (ManagerStatus status : ManagerStatus.values()) {
+            result.put(status, managerRepository.countManagersByStatus(status));
+        }
+
+        return result;
     }
 
 

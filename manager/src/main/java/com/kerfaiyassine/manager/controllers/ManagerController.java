@@ -11,6 +11,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/manager")
 @CrossOrigin("*")
@@ -37,13 +39,13 @@ public class ManagerController {
     }
 
     @PutMapping("/{id}/{managerStatus}")
-    public ResponseEntity<Void> changeStatus(@PathVariable int id, @PathVariable ManagerStatus managerStatus){
+    public ResponseEntity<Void> changeStatus(@PathVariable String id, @PathVariable ManagerStatus managerStatus){
         managerService.changeStatus(id,managerStatus);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ManagerDTO> getManagerById(@PathVariable int id){
+    public ResponseEntity<ManagerDTO> getManagerById(@PathVariable String id){
         ManagerDTO managerDTO = managerService.getManager(id);
         return ResponseEntity.ok(managerDTO);
     }
@@ -59,5 +61,16 @@ public class ManagerController {
     public ResponseEntity<Manager> addManager(@RequestBody ManagerCreationDTO managerCreationDTO){
         Manager manager = managerService.addManager(managerCreationDTO);
         return ResponseEntity.ok(manager);
+    }
+
+    @GetMapping("/stats/number/{managerStatus}")
+    public ResponseEntity<Integer> numberOfManagerByStatus(@PathVariable ManagerStatus managerStatus){
+        Integer managerNumber = managerService.numberOfManagerByStatus(managerStatus);
+        return ResponseEntity.ok(managerNumber);
+    }
+
+    @GetMapping("/number")
+    public ResponseEntity<Map<ManagerStatus, Integer>> numberOfManagersByStatus() {
+        return ResponseEntity.ok(managerService.countManagersGroupedByStatus());
     }
 }
