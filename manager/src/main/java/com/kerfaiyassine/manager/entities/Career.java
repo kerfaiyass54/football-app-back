@@ -37,10 +37,10 @@ public class Career {
     private Boolean renewable;
 
     @NotNull
-    private Long managerId;
+    private String managerId;
 
     @NotNull
-    private long teamId;
+    private String teamId;
 
 
 }

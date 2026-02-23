@@ -21,7 +21,7 @@ public class CareerService {
 
     public Career mapToCareer(CareerDTO  careerDTO) {
         Career career = new Career();
-        career.setDuration(careerDTO.getDuration());
+        career.setDurationInYears(careerDTO.getDuration());
         career.setYearStart(careerDTO.getYearStart());
         career.setTeamId(careerDTO.getTeamId());
         career.setManagerId(careerDTO.getManagerId());
@@ -32,11 +32,11 @@ public class CareerService {
 
     public ContractsDTO mapToContractsDTO(Career career) {
         ContractsDTO contractsDTO = new ContractsDTO();
-        contractsDTO.setDuration(career.getDuration());
+        contractsDTO.setDuration(career.getDurationInYears());
         contractsDTO.setYearStart(career.getYearStart());
         contractsDTO.setTeamId(career.getTeamId());
         contractsDTO.setManagerId(career.getManagerId());
-        contractsDTO.setRenewable(career.isRenewable());
+        contractsDTO.setRenewable(career.getRenewable());
         contractsDTO.setStatus(career.getStatus());
         return contractsDTO;
     }
