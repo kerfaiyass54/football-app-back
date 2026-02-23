@@ -27,6 +27,7 @@ public class ManagerService {
 
     public ManagerDTO mapToDTO(Manager manager) {
         ManagerDTO managerDTO = new ManagerDTO();
+        managerDTO.setId(manager.getId());
         managerDTO.setName(manager.getName());
         managerDTO.setStatus(manager.getStatus());
         managerDTO.setNationality(manager.getNationality());

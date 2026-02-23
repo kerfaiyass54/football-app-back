@@ -10,6 +10,7 @@ import lombok.*;
 @Getter
 @Setter
 public class ManagerDTO {
+    private String id;
     private String name;
     private int yearOfBirth;
     private ManagerStatus status;
