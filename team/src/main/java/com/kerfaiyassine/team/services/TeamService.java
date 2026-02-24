@@ -70,22 +70,16 @@ public class TeamService {
         return teamRepository.findAll(pageable).map(this::mapToRankingDTO);
     }
 
-    public void changeStatus(long id, TeamStatus teamStatus){
-        Optional<Team> optionalTeam = teamRepository.findById(id);
-        if(optionalTeam.isPresent()){
-            Team team = optionalTeam.get();
-            team.setStatus(teamStatus);
-            teamRepository.save(team);
-        }
+    public void changeStatus(String id, TeamStatus teamStatus){
+        Team team = teamRepository.findById(id).orElse(null);
+        team.setStatus(teamStatus);
+        teamRepository.save(team);
     }
 
-    public void updateBudget(long id, int budget){
-        Optional<Team> optionalTeam = teamRepository.findById(id);
-        if(optionalTeam.isPresent()){
-            Team team = optionalTeam.get();
-            team.setBudget(budget);
-            teamRepository.save(team);
-        }
+    public void updateBudget(String id, int budget){
+        Team team = teamRepository.findById(id).orElse(null);
+        team.setBudget(budget);
+        teamRepository.save(team);
     }
 
     public List<TeamDTO> getTeamsByYear(int year){
@@ -102,6 +96,10 @@ public class TeamService {
 
     public TeamDTO getTeamByName(String name){
         return mapToDTO(teamRepository.findTeamByName(name));
+    }
+    
+    public void deleteTeam(String id){
+        teamRepository.delete(teamRepository.findTeamById(id));
     }
 
 

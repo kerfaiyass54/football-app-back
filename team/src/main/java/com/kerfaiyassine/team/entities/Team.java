@@ -25,7 +25,7 @@ import lombok.ToString;
 public class Team {
 
     @Id
-    private long id;
+    private String id;
 
     @NotBlank
     @Size(max = 100)

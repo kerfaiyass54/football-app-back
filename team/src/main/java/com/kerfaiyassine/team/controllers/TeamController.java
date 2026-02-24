@@ -46,34 +46,40 @@ public class TeamController {
     }
 
     @PutMapping("/{id}/{teamStatus}")
-    public ResponseEntity<Void> changeStatus(@PathVariable long id, @PathVariable TeamStatus teamStatus){
+    public ResponseEntity<Void> changeStatus(@PathVariable String id, @PathVariable TeamStatus teamStatus){
         teamService.changeStatus(id, teamStatus);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping("/{id}/{budget}")
-    public ResponseEntity<Void> updateBudget(@PathVariable long id, @PathVariable int budget){
+    public ResponseEntity<Void> updateBudget(@PathVariable String id, @PathVariable int budget){
         teamService.updateBudget(id, budget);
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/{year}")
+    @GetMapping("/year/establish/{year}")
     public ResponseEntity<List<TeamDTO>> getTeamsByYear(@PathVariable int year){
         return ResponseEntity.ok(teamService.getTeamsByYear(year));
     }
 
-    @GetMapping("/{city}")
+    @GetMapping("/infos/city/{city}")
     public ResponseEntity<List<TeamDTO>> getTeamsByCity(@PathVariable String city){
         return ResponseEntity.ok(teamService.getTeamsByCity(city));
     }
 
-    @GetMapping("/{teamStatus}")
+    @GetMapping("/status/info/{teamStatus}")
     public ResponseEntity<List<TeamDTO>> getTeamsByTeamStatus(@PathVariable TeamStatus teamStatus){
         return ResponseEntity.ok(teamService.getTeamsByTeamStatus(teamStatus));
     }
 
-    @GetMapping("/{name}")
+    @GetMapping("/search/{name}")
     public ResponseEntity<TeamDTO> getTeamsByName(@PathVariable String name){
         return ResponseEntity.ok(teamService.getTeamByName(name));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteTeam(@PathVariable String id){
+        teamService.deleteTeam(id);
+        return ResponseEntity.ok().build();
     }
 }
