@@ -28,5 +28,13 @@ public class Location {
     @Size(min = 1, max = 25)
     private String name;
 
+    @NotBlank
+    @Size(min = 1, max = 25)
+    private String country;
+
+    @NotBlank
+    @Size(min = 1, max = 25)
+    private String continent;
+
     private List<Long> supporters;
 }

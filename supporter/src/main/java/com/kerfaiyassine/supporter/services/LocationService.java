@@ -58,6 +58,11 @@ public class LocationService {
         return locationRepository.findAll(pageable).map(this::mapToDTO);
     }
 
+    public Page<LocationDTO> getLocationsPageByContinent(int page, int size, String continent){
+        Pageable pageable = PageRequest.of(page, size);
+        return locationRepository.findLocationByContinent(continent, pageable).map(this::mapToDTO);
+    }
+
 
 
 

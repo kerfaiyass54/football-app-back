@@ -55,4 +55,10 @@ public class LocationController {
         Page<LocationDTO> locationDTOS = locationService.getLocationsPage(page, size);
         return ResponseEntity.ok(locationDTOS);
     }
+
+    @GetMapping("/continent/{continent}")
+    public ResponseEntity<Page<LocationDTO>> getLocationsByContinent(@RequestParam int  page,@RequestParam int size,@PathVariable String continent){
+        Page<LocationDTO> locationDTOS = locationService.getLocationsPageByContinent(page,size,continent);
+        return ResponseEntity.ok(locationDTOS);
+    }
 }
