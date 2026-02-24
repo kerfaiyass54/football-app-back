@@ -5,6 +5,7 @@ import com.kerfaiyassine.supporter.DTOs.LocationSupporter;
 import com.kerfaiyassine.supporter.DTOs.SupporterDTO;
 import com.kerfaiyassine.supporter.entities.Supporter;
 import com.kerfaiyassine.supporter.services.SupporterService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,7 +40,7 @@ public class SupporterController {
         return ResponseEntity.ok(supporterDTOS);
     }
 
-    @GetMapping("/")
+    @GetMapping("/list")
     public ResponseEntity<List<SupporterDTO>> getAllSupporters() {
         List<SupporterDTO> supporterDTOS = supporterService.getAllSupporters();
         return ResponseEntity.ok(supporterDTOS);
@@ -67,6 +68,12 @@ public class SupporterController {
     public ResponseEntity<Void> assignLocation(@RequestBody LocationSupporter locationSupporter) {
         supporterService.assignLocation(locationSupporter.getLocationName(),locationSupporter.getName());
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/")
+    public ResponseEntity<Page<SupporterDTO>> getAllSupportersPaged(int page, int size) {
+        Page<SupporterDTO> supporterDTOS = supporterService.getAllSupportersPaged(page, size);
+        return ResponseEntity.ok(supporterDTOS);
     }
 
 

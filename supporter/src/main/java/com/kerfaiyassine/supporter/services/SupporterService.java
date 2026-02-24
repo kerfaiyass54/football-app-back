@@ -7,6 +7,9 @@ import com.kerfaiyassine.supporter.entities.Supporter;
 import com.kerfaiyassine.supporter.repositories.LocationRepository;
 import com.kerfaiyassine.supporter.repositories.SupporterRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -66,6 +69,11 @@ public class SupporterService {
     public void assignLocation(String locationName,String name){
         Location location = locationRepository.findLocationByName(locationName);
         supporterRepository.findSupporterByName(name).setLocationId(location.getId());
+    }
+
+    public Page<SupporterDTO> getAllSupportersPaged(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return supporterRepository.findAll(pageable).map(this::mapToDTO);
     }
 
 
