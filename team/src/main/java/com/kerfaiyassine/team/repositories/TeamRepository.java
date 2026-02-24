@@ -9,7 +9,7 @@ import java.util.List;
 public interface TeamRepository extends MongoRepository<Team, String> {
 
     public Team findTeamByName(String name);
-    public List<Team> findTeamsByTeamStatus(TeamStatus status);
+    public List<Team> findTeamsByStatus(TeamStatus status);
     public List<Team> findTeamsByCity(String city);
     public List<Team> findTeamsByEstablishYear(int establishYear);
     public Team findTeamById(String id);

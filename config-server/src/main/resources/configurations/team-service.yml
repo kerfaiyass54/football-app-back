@@ -3,8 +3,5 @@ server:
 spring:
   data:
     mongodb:
-      username: admin
-      password: admin
-      host: localhost
-      port: 27017
-      database: team
+      uri: mongodb://team_user:team_pass@localhost:27018/team?authSource=team
+

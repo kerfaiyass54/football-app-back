@@ -91,7 +91,7 @@ public class TeamService {
     }
 
     public List<TeamDTO> getTeamsByTeamStatus(TeamStatus teamStatus){
-        return teamRepository.findTeamsByTeamStatus(teamStatus).stream().map(this::mapToDTO).toList();
+        return teamRepository.findTeamsByStatus(teamStatus).stream().map(this::mapToDTO).toList();
     }
 
     public TeamDTO getTeamByName(String name){
