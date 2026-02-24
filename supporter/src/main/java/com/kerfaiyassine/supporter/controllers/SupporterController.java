@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/supporter")
+@CrossOrigin("*")
 public class SupporterController {
 
     private final SupporterService  supporterService;

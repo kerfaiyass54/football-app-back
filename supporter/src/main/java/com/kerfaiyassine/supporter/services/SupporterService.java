@@ -28,7 +28,9 @@ public class SupporterService {
 
     public SupporterDTO mapToDTO(Supporter supporter) {
         SupporterDTO supporterDTO = new SupporterDTO();
+        supporterDTO.setId(String.valueOf(supporter.getId()));
         supporterDTO.setName(supporter.getName());
+        supporterDTO.setNationality(supporter.getNationality());
         supporterDTO.setLocationId(supporter.getLocationId());
         return supporterDTO;
     }
