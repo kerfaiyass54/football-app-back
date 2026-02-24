@@ -3,6 +3,7 @@ package com.kerfaiyassine.supporter.controllers;
 
 import com.kerfaiyassine.supporter.DTOs.LocationDTO;
 import com.kerfaiyassine.supporter.entities.Location;
+import com.kerfaiyassine.supporter.enums.Continent;
 import com.kerfaiyassine.supporter.services.LocationService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -57,7 +58,7 @@ public class LocationController {
     }
 
     @GetMapping("/continent/{continent}")
-    public ResponseEntity<Page<LocationDTO>> getLocationsByContinent(@RequestParam int  page,@RequestParam int size,@PathVariable String continent){
+    public ResponseEntity<Page<LocationDTO>> getLocationsByContinent(@RequestParam int  page,@RequestParam int size,@PathVariable Continent continent){
         Page<LocationDTO> locationDTOS = locationService.getLocationsPageByContinent(page,size,continent);
         return ResponseEntity.ok(locationDTOS);
     }

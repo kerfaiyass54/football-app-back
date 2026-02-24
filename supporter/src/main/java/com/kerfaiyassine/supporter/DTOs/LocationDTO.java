@@ -1,6 +1,7 @@
 package com.kerfaiyassine.supporter.DTOs;
 
 
+import com.kerfaiyassine.supporter.enums.Continent;
 import lombok.*;
 
 @AllArgsConstructor
@@ -13,5 +14,5 @@ public class LocationDTO {
     private String id;
     private String name;
     private String country;
-    private String continent;
+    private Continent continent;
 }

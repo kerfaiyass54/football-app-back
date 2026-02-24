@@ -3,6 +3,7 @@ package com.kerfaiyassine.supporter.services;
 
 import com.kerfaiyassine.supporter.DTOs.LocationDTO;
 import com.kerfaiyassine.supporter.entities.Location;
+import com.kerfaiyassine.supporter.enums.Continent;
 import com.kerfaiyassine.supporter.repositories.LocationRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -58,7 +59,7 @@ public class LocationService {
         return locationRepository.findAll(pageable).map(this::mapToDTO);
     }
 
-    public Page<LocationDTO> getLocationsPageByContinent(int page, int size, String continent){
+    public Page<LocationDTO> getLocationsPageByContinent(int page, int size, Continent continent){
         Pageable pageable = PageRequest.of(page, size);
         return locationRepository.findLocationByContinent(continent, pageable).map(this::mapToDTO);
     }

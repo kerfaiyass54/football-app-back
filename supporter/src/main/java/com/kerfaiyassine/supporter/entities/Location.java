@@ -1,4 +1,5 @@
 package com.kerfaiyassine.supporter.entities;
+import com.kerfaiyassine.supporter.enums.Continent;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.NoArgsConstructor;
@@ -34,7 +35,7 @@ public class Location {
 
     @NotBlank
     @Size(min = 1, max = 25)
-    private String continent;
+    private Continent continent;
 
     private List<Long> supporters;
 }
