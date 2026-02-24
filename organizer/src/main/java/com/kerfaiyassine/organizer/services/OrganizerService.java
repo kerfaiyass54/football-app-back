@@ -48,4 +48,8 @@ public class OrganizerService {
         Pageable pageable = PageRequest.of(page, size);
         return organizerRepository.findAll(pageable).map(this::mapToDTO);
     }
+
+    public void deleteOrganizer(Integer id){
+        organizerRepository.deleteById(id);
+    }
 }

@@ -43,4 +43,10 @@ public class OrganizerController {
         Page<OrganizerDTO> organizerDTOs = organizerService.getOrganizers(size, page);
         return new ResponseEntity<>(organizerDTOs, HttpStatus.OK);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteOrganizer(@PathVariable Integer id){
+        organizerService.deleteOrganizer(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
