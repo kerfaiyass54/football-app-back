@@ -6,9 +6,13 @@ import com.kerfaiyassine.player.entities.Player;
 import com.kerfaiyassine.player.enums.PlayerSituation;
 import com.kerfaiyassine.player.enums.PlayerStatus;
 import com.kerfaiyassine.player.repositories.PlayerRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -52,11 +56,7 @@ public class PlayerService {
 
 
     public PlayerDTO getPlayerById(String id) {
-        Optional<Player> player = playerRepository.findById(id);
-        if (player.isPresent()) {
-            return mapToDTO(player.get());
-        }
-        return null;
+        return mapToDTO(playerRepository.findPlayerById(id));
     }
 
     public PlayerDTO getPlayerByName(String name) {
@@ -82,7 +82,26 @@ public class PlayerService {
     }
 
     public void deletePlayer(String id) {
-        playerRepository.deleteById(id);
+        playerRepository.delete(playerRepository.findPlayerById(id));
+    }
+
+    public Integer getNumberOfPlayersByStatus(PlayerStatus playerStatus) {
+        return playerRepository.findPlayersByStatus(playerStatus).size();
+    }
+
+    public Page<PlayerDTO> getAllPlayers(int size, int page) {
+        Pageable pageable = PageRequest.of(page, size);
+        return playerRepository.findAll(pageable).map(this::mapToDTO);
+    }
+
+    public Double getHighestPrice() {
+        return playerRepository.findAll()
+                .stream()
+                .map(Player::getMarketValue)
+                .filter(Objects::nonNull)
+                .mapToDouble(Double::doubleValue)
+                .max()
+                .orElse(0.0); // or throw exception if preferred
     }
 
 

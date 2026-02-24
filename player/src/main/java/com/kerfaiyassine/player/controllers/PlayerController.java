@@ -5,6 +5,7 @@ import com.kerfaiyassine.player.dtos.PlayerDTO;
 import com.kerfaiyassine.player.entities.Player;
 import com.kerfaiyassine.player.repositories.PlayerRepository;
 import com.kerfaiyassine.player.services.PlayerService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -57,4 +58,18 @@ public class PlayerController {
         playerService.deletePlayer(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping("/")
+    public ResponseEntity<Page<PlayerDTO>> getAllPlayers(@RequestParam int size, @RequestParam int page){
+        Page<PlayerDTO>  players = playerService.getAllPlayers(size, page);
+        return new ResponseEntity<>(players, HttpStatus.OK);
+    }
+
+    @GetMapping("/highest")
+    public ResponseEntity<Double> getHighestPrice(){
+        Double highestPrice = playerService.getHighestPrice();
+        return new ResponseEntity<>(highestPrice, HttpStatus.OK);
+    }
+
+
 }
