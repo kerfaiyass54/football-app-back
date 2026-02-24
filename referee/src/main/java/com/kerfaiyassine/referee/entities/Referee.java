@@ -39,8 +39,7 @@ public class Referee {
     @Column(name="nationality", nullable = false)
     private String nationality;
 
-    @NotBlank
-    @Column(name="organizer_id", nullable = false)
+    @Column(name="organizer_id")
     private long organizerId;
 
 }
