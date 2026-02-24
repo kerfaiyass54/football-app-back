@@ -82,4 +82,9 @@ public class TeamController {
         teamService.deleteTeam(id);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<TeamDTO> getTeamById(@PathVariable String id){
+        return ResponseEntity.ok(teamService.getTeamById(id));
+    }
 }

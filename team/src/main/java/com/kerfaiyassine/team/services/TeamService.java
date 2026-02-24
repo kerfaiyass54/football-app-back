@@ -102,6 +102,10 @@ public class TeamService {
         teamRepository.delete(teamRepository.findTeamById(id));
     }
 
+    public TeamDTO getTeamById(String id){
+        return mapToDTO(teamRepository.findTeamById(id));
+    }
+
 
 
 }
