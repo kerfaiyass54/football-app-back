@@ -51,7 +51,7 @@ public class PlayerService {
     }
 
 
-    public PlayerDTO getPlayerById(Long id) {
+    public PlayerDTO getPlayerById(String id) {
         Optional<Player> player = playerRepository.findById(id);
         if (player.isPresent()) {
             return mapToDTO(player.get());
@@ -67,7 +67,7 @@ public class PlayerService {
         return playerRepository.findPlayersByNationality(nationality).stream().map(this::mapToDTO).toList();
     }
 
-    public Player updatePlayer(PlayerDTO playerDTO,Long id) {
+    public Player updatePlayer(PlayerDTO playerDTO,String id) {
         Player player = playerRepository.findPlayerById(id);
         player.setName(playerDTO.getName());
         player.setNationality(playerDTO.getNationality());
@@ -81,7 +81,7 @@ public class PlayerService {
         return playerRepository.save(player);
     }
 
-    public void deletePlayer(Long id) {
+    public void deletePlayer(String id) {
         playerRepository.deleteById(id);
     }
 

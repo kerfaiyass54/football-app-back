@@ -12,5 +12,5 @@ public interface PlayerRepository extends MongoRepository<Player, Long> {
 
     public List<Player> findPlayersByNationality(String nationality);
 
-    public Player findPlayerById(Long id);
+    public Player findPlayerById(String id);
 }

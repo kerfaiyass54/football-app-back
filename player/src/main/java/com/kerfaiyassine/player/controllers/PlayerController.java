@@ -29,7 +29,7 @@ public class PlayerController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PlayerDTO> findPlayerById(@PathVariable Long id) {
+    public ResponseEntity<PlayerDTO> findPlayerById(@PathVariable String id) {
         PlayerDTO playerDTO = playerService.getPlayerById(id);
         return new ResponseEntity<>(playerDTO, HttpStatus.OK);
     }
@@ -47,13 +47,13 @@ public class PlayerController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Player> updatePlayer(@PathVariable Long id, @RequestBody PlayerDTO playerDTO) {
+    public ResponseEntity<Player> updatePlayer(@PathVariable String id, @RequestBody PlayerDTO playerDTO) {
         Player player = playerService.updatePlayer(playerDTO, id);
         return new ResponseEntity<>(player, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePlayer(@PathVariable Long id) {
+    public ResponseEntity<Void> deletePlayer(@PathVariable String id) {
         playerService.deletePlayer(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

@@ -2,7 +2,6 @@ package com.kerfaiyassine.player.dtos;
 
 
 import com.kerfaiyassine.player.enums.PlayerPosition;
-import com.kerfaiyassine.player.enums.PlayerSituation;
 import com.kerfaiyassine.player.enums.PlayerStatus;
 import lombok.*;
 
@@ -11,15 +10,13 @@ import lombok.*;
 @Builder
 @Getter
 @Setter
-public class PlayerDTO {
+public class PlayerDisplayDTO {
 
     private String name;
     private int age;
     private String nationality;
     private PlayerPosition position;
-    private Integer ability;
-    private PlayerSituation situation;
-    private double marketValue;
+    private double ability;
     private double height;
     private double weight;
     private PlayerStatus status;
