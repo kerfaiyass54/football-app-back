@@ -26,6 +26,7 @@ public class PlayerService {
 
     public PlayerDTO mapToDTO(Player player) {
         PlayerDTO playerDTO = new PlayerDTO();
+        playerDTO.setId(player.getId());
         playerDTO.setName(player.getName());
         playerDTO.setNationality(player.getNationality());
         playerDTO.setPosition(player.getPosition());

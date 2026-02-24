@@ -12,7 +12,7 @@ import lombok.*;
 @Getter
 @Setter
 public class PlayerDTO {
-
+    private String id;
     private String name;
     private int age;
     private String nationality;
