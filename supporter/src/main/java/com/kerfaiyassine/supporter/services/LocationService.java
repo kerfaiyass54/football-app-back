@@ -5,6 +5,9 @@ import com.kerfaiyassine.supporter.DTOs.LocationDTO;
 import com.kerfaiyassine.supporter.entities.Location;
 import com.kerfaiyassine.supporter.repositories.LocationRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -48,6 +51,11 @@ public class LocationService {
     public int numberOfHabitants(String locationName){
         Location location = locationRepository.findLocationByName(locationName);
         return location.getSupporters().size();
+    }
+
+    public Page<LocationDTO> getLocationsPage(int  page, int size){
+        Pageable pageable = PageRequest.of(page, size);
+        return locationRepository.findAll(pageable).map(this::mapToDTO);
     }
 
 

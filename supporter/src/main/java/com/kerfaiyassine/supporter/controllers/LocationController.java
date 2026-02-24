@@ -4,6 +4,7 @@ package com.kerfaiyassine.supporter.controllers;
 import com.kerfaiyassine.supporter.DTOs.LocationDTO;
 import com.kerfaiyassine.supporter.entities.Location;
 import com.kerfaiyassine.supporter.services.LocationService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,4 +50,9 @@ public class LocationController {
         return ResponseEntity.ok(num);
     }
 
+    @GetMapping("/paged")
+    public ResponseEntity<Page<LocationDTO>> getLocationsPage(@RequestParam int  page,@RequestParam int size){
+        Page<LocationDTO> locationDTOS = locationService.getLocationsPage(page, size);
+        return ResponseEntity.ok(locationDTOS);
+    }
 }
