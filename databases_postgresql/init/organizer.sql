@@ -1,4 +1,4 @@
-CREATE TABLE organizer (
-                           id SERIAL PRIMARY KEY,
-                           name VARCHAR(255) NOT NULL UNIQUE
+CREATE TABLE organizers (
+                            id INTEGER PRIMARY KEY,
+                            name VARCHAR(100) NOT NULL UNIQUE
 );
