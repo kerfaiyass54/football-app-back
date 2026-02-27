@@ -1,8 +1,13 @@
 import json
 from openai import OpenAI
 from config.settings import OPENAI_API_KEY
+from dotenv import load_dotenv
+import os
+from openai import OpenAI
 
-client = OpenAI(api_key=OPENAI_API_KEY)
+load_dotenv()
+
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 tools = [
     {
