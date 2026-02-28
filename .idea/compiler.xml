@@ -11,18 +11,18 @@
         <module name="gateway" />
         <module name="discover-server" />
       </profile>
-      <profile name="Annotation profile for tournament" enabled="true">
+      <profile name="Annotation profile for team" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
         </processorPath>
-        <module name="ticket" />
         <module name="manager" />
+        <module name="ticket" />
         <module name="match" />
-        <module name="tournament" />
         <module name="team" />
+        <module name="tournament" />
         <module name="referee" />
         <module name="supporter" />
         <module name="organizer" />

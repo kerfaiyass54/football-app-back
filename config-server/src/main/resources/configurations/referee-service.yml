@@ -18,3 +18,5 @@ spring:
     baseline-version: 0
     user: ${spring.datasource.username}
     password: ${spring.datasource.password}
+gemini:
+  api-key: ${GEMINI_API_KEY}

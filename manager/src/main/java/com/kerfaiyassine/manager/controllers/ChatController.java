@@ -1,0 +1,40 @@
+package com.kerfaiyassine.manager.controllers;
+
+import com.kerfaiyassine.manager.services.GeminiService;
+import com.kerfaiyassine.manager.services.QueryService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
+
+@RestController
+@RequestMapping("/chat")
+public class ChatController {
+
+    private final GeminiService geminiService;
+    private final QueryService queryService;
+
+    public ChatController(GeminiService geminiService,
+                          QueryService queryService) {
+        this.geminiService = geminiService;
+        this.queryService = queryService;
+    }
+
+    @PostMapping
+    public ResponseEntity<?> chat(@RequestBody Map<String, String> body) {
+
+        String question = body.get("question");
+
+        if (question == null || question.isBlank()) {
+            return ResponseEntity.badRequest().body("Question is required.");
+        }
+
+        String mongoQuery = geminiService.generateMongoQuery(question);
+
+        System.out.println("Generated Mongo Query: " + mongoQuery);
+
+        return ResponseEntity.ok(
+                queryService.executeSafeFind(mongoQuery)
+        );
+    }
+}

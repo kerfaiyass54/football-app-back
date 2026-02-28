@@ -4,3 +4,5 @@ spring:
   data:
     mongodb:
       uri: mongodb://manager_user:manager_pass@localhost:27018/manager?authSource=manager
+gemini:
+  api-key: ${GEMINI_API_KEY}

@@ -4,4 +4,6 @@ spring:
   data:
     mongodb:
       uri: mongodb://team_user:team_pass@localhost:27018/team?authSource=team
+gemini:
+  api-key: ${GEMINI_API_KEY}
 
