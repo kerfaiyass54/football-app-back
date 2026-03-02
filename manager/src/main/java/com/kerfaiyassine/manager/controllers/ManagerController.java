@@ -9,7 +9,15 @@ import com.kerfaiyassine.manager.enums.ManagerStatus;
 import com.kerfaiyassine.manager.services.ManagerService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Map;
 
@@ -31,22 +39,26 @@ public class ManagerController {
         return ResponseEntity.ok(managerStatusDTOPage);
     }
 
-    @GetMapping("/nationality/{nationality}")
-    public ResponseEntity<Page<ManagerDTO>> getManagersByNationality(@PathVariable String nationality, @RequestParam(defaultValue = "0") int page,
+    @GetMapping("/nationality")
+    public ResponseEntity<Page<ManagerDTO>> getManagersByNationality(@RequestParam String nationality, @RequestParam(defaultValue = "0") int page,
                                                                      @RequestParam(defaultValue = "5") int size){
         Page<ManagerDTO> managers = managerService.getManagersByNationality(nationality, page, size);
         return ResponseEntity.ok(managers);
     }
 
-    @PutMapping("/{id}/{managerStatus}")
-    public ResponseEntity<Void> changeStatus(@PathVariable String id, @PathVariable ManagerStatus managerStatus){
+    @PatchMapping("/")
+    public ResponseEntity<Void> changeStatus(@RequestParam String id, @RequestParam ManagerStatus managerStatus){
         managerService.changeStatus(id,managerStatus);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
+
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ManagerDTO> getManagerById(@PathVariable String id){
         ManagerDTO managerDTO = managerService.getManager(id);
+        if (managerDTO == null) {
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.ok(managerDTO);
     }
 
@@ -58,19 +70,15 @@ public class ManagerController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Manager> addManager(@RequestBody ManagerCreationDTO managerCreationDTO){
-        Manager manager = managerService.addManager(managerCreationDTO);
-        return ResponseEntity.ok(manager);
+    public ResponseEntity<ManagerDTO> addManager(@RequestBody ManagerCreationDTO managerCreationDTO){
+        ManagerDTO manager = managerService.addManager(managerCreationDTO);
+        return ResponseEntity.status(201).body(manager);
     }
 
-    @GetMapping("/stats/number/{managerStatus}")
-    public ResponseEntity<Integer> numberOfManagerByStatus(@PathVariable ManagerStatus managerStatus){
+    @GetMapping("/stats")
+    public ResponseEntity<Integer> numberOfManagerByStatus(@RequestParam ManagerStatus managerStatus){
         Integer managerNumber = managerService.numberOfManagerByStatus(managerStatus);
         return ResponseEntity.ok(managerNumber);
     }
 
-    @GetMapping("/number")
-    public ResponseEntity<Map<ManagerStatus, Integer>> numberOfManagersByStatus() {
-        return ResponseEntity.ok(managerService.countManagersGroupedByStatus());
-    }
 }

@@ -1,6 +1,7 @@
 package com.kerfaiyassine.manager.services;
 
 import com.kerfaiyassine.manager.entities.Manager;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@Slf4j
 public class QueryService {
 
     private final MongoTemplate mongoTemplate;

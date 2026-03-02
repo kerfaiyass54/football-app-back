@@ -15,7 +15,4 @@ public interface ManagerRepository extends MongoRepository<Manager, Long> {
 
     public List<Manager> findManagersByStatus(ManagerStatus status);
 
-    public int countManagersByStatus(ManagerStatus status);
-
-    public Manager findManagerById(String id);
 }

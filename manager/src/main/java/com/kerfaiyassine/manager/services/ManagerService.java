@@ -53,8 +53,9 @@ public class ManagerService {
         return managerStatusDTO;
     }
 
-    public Manager addManager(ManagerCreationDTO managerCreationDTO) {
-        return  managerRepository.save(mapToCreation(managerCreationDTO));
+    public ManagerDTO addManager(ManagerCreationDTO managerCreationDTO) {
+        Manager manager = managerRepository.save(mapToCreation(managerCreationDTO));
+        return  mapToDTO(manager);
     }
 
     public Page<ManagerDTO> getManagers(int page, int size) {
@@ -63,13 +64,17 @@ public class ManagerService {
     }
 
     public ManagerDTO getManager(String id){
-        return mapToDTO(managerRepository.findManagerById(id));
+        Optional<Manager> manager = managerRepository.findById(Long.valueOf(id));
+        return manager.map(this::mapToDTO).orElse(null);
     }
 
     public void changeStatus(String id, ManagerStatus managerStatus) {
-        Manager manager = managerRepository.findManagerById(id);
-        manager.setStatus(managerStatus);
-        managerRepository.save(manager);
+        Optional<Manager> manager = managerRepository.findById(Long.valueOf(id));
+        if (manager.isPresent()) {
+            Manager managerObj = manager.get();
+            managerObj.setStatus(managerStatus);
+            managerRepository.save(managerObj);
+        }
     }
 
     public Page<ManagerDTO> getManagersByNationality(String nationality, int size, int page) {
@@ -87,16 +92,7 @@ public class ManagerService {
         return managerRepository.findManagersByStatus(managerStatus).size();
     }
 
-    public Map<ManagerStatus, Integer> countManagersGroupedByStatus() {
 
-        Map<ManagerStatus, Integer> result = new EnumMap<>(ManagerStatus.class);
-
-        for (ManagerStatus status : ManagerStatus.values()) {
-            result.put(status, managerRepository.countManagersByStatus(status));
-        }
-
-        return result;
-    }
 
 
 }

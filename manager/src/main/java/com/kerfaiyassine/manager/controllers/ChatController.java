@@ -3,7 +3,10 @@ package com.kerfaiyassine.manager.controllers;
 import com.kerfaiyassine.manager.services.GeminiService;
 import com.kerfaiyassine.manager.services.QueryService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Map;
 
