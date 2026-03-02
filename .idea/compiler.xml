@@ -11,7 +11,7 @@
         <module name="gateway" />
         <module name="discover-server" />
       </profile>
-      <profile name="Annotation profile for team" enabled="true">
+      <profile name="Annotation profile for builder" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />

@@ -9,7 +9,7 @@ import lombok.Setter;
 import com.kerfaiyassine.builder.enums.Expertise;
 
 import java.math.BigDecimal;
-import java.time.Year;
+
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,6 +18,7 @@ import java.time.Year;
 public class BuilderDTO {
 
     private Integer id;
+
     @NotBlank
     @Size(max = 100)
     private String name;

@@ -10,7 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class YearsMAxMin {
+public class YearsMaxMin {
 
     private Integer minYear;
     private Integer maxYear;

@@ -6,17 +6,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
 
 public interface BuilderRepository extends JpaRepository<Builder, Integer> {
 
     public Builder findBuilderById(Integer id);
 
-    public List<Builder>  findBuilderByNationality(String nationality);
+    public Page<Builder>  findBuilderByNationality(String nationality, Pageable pageable);
 
-    public List<Builder> findBuildersByExpertise(Expertise expertise);
+    public Page<Builder> findBuildersByExpertise(Expertise expertise,  Pageable pageable);
 
-    public Page<Builder> findAll(Pageable pageable);
+    Page<Builder> findAll(Pageable pageable);
 
-    long countByExpertise(Expertise expertise);
 }

@@ -3,27 +3,32 @@ package com.kerfaiyassine.builder.services;
 
 import com.kerfaiyassine.builder.DTOs.BuilderDTO;
 import com.kerfaiyassine.builder.DTOs.ExpertiseStats;
-import com.kerfaiyassine.builder.DTOs.YearsMAxMin;
+import com.kerfaiyassine.builder.DTOs.YearsMaxMin;
 import com.kerfaiyassine.builder.entities.Builder;
 import com.kerfaiyassine.builder.enums.Expertise;
 import com.kerfaiyassine.builder.repositories.BuilderRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 @Slf4j
 public class BuilderService {
 
-    @Autowired
-    private BuilderRepository builderRepository;
+    private final BuilderRepository builderRepository;
+
+    public BuilderService(BuilderRepository builderRepository) {
+        this.builderRepository = builderRepository;
+    }
 
     public BuilderDTO mapToDTO(Builder builder) {
         BuilderDTO dto = new BuilderDTO();
@@ -36,26 +41,30 @@ public class BuilderService {
         return dto;
     }
 
-    public Builder createBuilder(BuilderDTO builderDTO) {
+    public BuilderDTO createBuilder(BuilderDTO builderDTO) {
         Builder builder = new Builder();
         builder.setName(builderDTO.getName());
         builder.setExpertise(builderDTO.getExpertise());
         builder.setPrice(builderDTO.getPrice());
         builder.setNationality(builderDTO.getNationality());
         builder.setYearEstablished(builderDTO.getYearEstablished());
-        return builderRepository.save(builder);
+        Builder builder1 = builderRepository.save(builder);
+        return mapToDTO(builder1);
     }
 
     public BuilderDTO getBuilderById(Integer id) {
-        return  mapToDTO(builderRepository.findBuilderById(id));
+        Optional<Builder> optional = builderRepository.findById(id);
+        return optional.map(this::mapToDTO).orElse(null);
     }
 
-    public List<BuilderDTO> getBuilderByNationality(String nationality) {
-        return builderRepository.findBuilderByNationality(nationality).stream().map(this::mapToDTO).toList();
+    public List<BuilderDTO> getBuilderByNationality(String nationality, int size, int page) {
+        Pageable pageable = PageRequest.of(page, size);
+        return builderRepository.findBuilderByNationality(nationality, pageable).stream().map(this::mapToDTO).toList();
     }
 
-    public List<BuilderDTO> getBuilderByExpertise(Expertise expertise) {
-        return builderRepository.findBuildersByExpertise(expertise).stream().map(this::mapToDTO).toList();
+    public List<BuilderDTO> getBuilderByExpertise(Expertise expertise, int size, int page) {
+        Pageable pageable = PageRequest.of(page, size);
+        return builderRepository.findBuildersByExpertise(expertise, pageable).stream().map(this::mapToDTO).toList();
     }
 
     public void updateBuilderPrice(Integer id, BigDecimal price) {
@@ -70,20 +79,23 @@ public class BuilderService {
     }
 
     public ExpertiseStats countBuilders(Expertise expertise) {
-
-        long count = builderRepository.countByExpertise(expertise);
-
-        return new ExpertiseStats(expertise, (int) count);
+        int sum = 0;
+        List<Builder> builders = builderRepository.findAll();
+        for (Builder builder : builders) {
+            if (builder.getExpertise().equals(expertise)) {
+                sum++;
+            }
+        }
+        return new ExpertiseStats(expertise, sum);
     }
 
-    public YearsMAxMin getYoungestAndOldest() {
-
+    public YearsMaxMin getYoungestAndOldest() {
         List<Integer> years = builderRepository.findAll()
                 .stream()
                 .map(Builder::getYearEstablished)
                 .toList();
 
-        YearsMAxMin result = new YearsMAxMin();
+        YearsMaxMin result = new YearsMaxMin();
 
         if (years.isEmpty()) {
             result.setMinYear(0);
