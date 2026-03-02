@@ -15,6 +15,6 @@ public interface BuilderRepository extends JpaRepository<Builder, Integer> {
 
     public Page<Builder> findBuildersByExpertise(Expertise expertise,  Pageable pageable);
 
-    Page<Builder> findAll(Pageable pageable);
+    public Page<Builder> findAll(Pageable pageable);
 
 }

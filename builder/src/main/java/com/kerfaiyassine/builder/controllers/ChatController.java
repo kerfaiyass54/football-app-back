@@ -2,6 +2,7 @@ package com.kerfaiyassine.builder.controllers;
 
 import com.kerfaiyassine.builder.services.GeminiService;
 import com.kerfaiyassine.builder.services.QueryService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,8 +46,6 @@ public class ChatController {
 
         System.out.println("Generated SQL: " + sql);
 
-        return ResponseEntity.ok(
-                queryService.executeSafeSelect(sql)
-        );
+        return new ResponseEntity<>(queryService.executeSafeSelect(sql), HttpStatus.CREATED);
     }
 }

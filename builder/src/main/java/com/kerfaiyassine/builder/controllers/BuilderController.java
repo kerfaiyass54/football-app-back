@@ -6,6 +6,8 @@ import com.kerfaiyassine.builder.DTOs.ExpertiseStats;
 import com.kerfaiyassine.builder.DTOs.YearsMaxMin;
 import com.kerfaiyassine.builder.enums.Expertise;
 import com.kerfaiyassine.builder.services.BuilderService;
+import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,38 +36,44 @@ public class BuilderController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<BuilderDTO> createBuilder(@RequestBody BuilderDTO builderDTO){
+    @Operation(summary = "Create a new builder")
+    public ResponseEntity<BuilderDTO> createBuilder(@Valid @RequestBody BuilderDTO builderDTO){
         BuilderDTO builder = builderService.createBuilder(builderDTO);
         return new ResponseEntity<>(builder, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<BuilderDTO> getBuilder(@PathVariable Integer id){
+    @Operation(summary = "Get a builder by id")
+    public ResponseEntity<BuilderDTO> getBuilder(@Valid @PathVariable Integer id){
         BuilderDTO builderDTO = builderService.getBuilderById(id);
         return new ResponseEntity<>(builderDTO, HttpStatus.OK);
     }
 
     @GetMapping("/nationalities")
-    public ResponseEntity<List<BuilderDTO>> getBuildersByNationality(@RequestParam String nationality, @RequestParam(defaultValue = "0") int page,
+    @Operation(summary = "Get builders list according to nationality")
+    public ResponseEntity<List<BuilderDTO>> getBuildersByNationality(@Valid @RequestParam String nationality, @RequestParam(defaultValue = "0") int page,
                                                                      @RequestParam(defaultValue = "5") int size){
         List<BuilderDTO> builders = builderService.getBuilderByNationality(nationality, page, size);
         return new ResponseEntity<>(builders, HttpStatus.OK);
     }
 
     @GetMapping("/expertises")
-    public ResponseEntity<List<BuilderDTO>> getBuildersByExpertise(@RequestParam Expertise expertise, @RequestParam(defaultValue = "0") int page,
+    @Operation(summary = "Get builders list according to expertise")
+    public ResponseEntity<List<BuilderDTO>> getBuildersByExpertise(@Valid @RequestParam Expertise expertise, @RequestParam(defaultValue = "0") int page,
                                                                    @RequestParam(defaultValue = "5") int size){
         List<BuilderDTO> builders = builderService.getBuilderByExpertise(expertise, page, size);
         return new ResponseEntity<>(builders, HttpStatus.OK);
     }
 
     @PatchMapping("/")
-    public ResponseEntity<Void> updateBuilder(@RequestParam Integer id, @RequestParam BigDecimal price){
+    @Operation(summary = "Update a builder")
+    public ResponseEntity<Void> updateBuilder(@Valid @RequestParam Integer id,@Valid  @RequestParam BigDecimal price){
         builderService.updateBuilderPrice(id, price);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/")
+    @Operation(summary = "Get builders list")
     public ResponseEntity<Page<BuilderDTO>> getAllBuilders(@RequestParam(defaultValue = "0") int page,
                                                            @RequestParam(defaultValue = "5") int size){
         Page<BuilderDTO> builders = builderService.getAllBuilders(page, size);
@@ -74,7 +82,8 @@ public class BuilderController {
 
 
     @GetMapping("/stats")
-    public ResponseEntity<ExpertiseStats> countBuilders(@RequestParam String expertise) {
+    @Operation(summary = "Get builders stats for an expertise")
+    public ResponseEntity<ExpertiseStats> countBuilders(@Valid @RequestParam String expertise) {
         try {
             Expertise exp = Expertise.valueOf(expertise.toUpperCase());
             ExpertiseStats stats = builderService.countBuilders(exp);
@@ -85,21 +94,23 @@ public class BuilderController {
     }
 
     @GetMapping("/aged")
+    @Operation(summary = "Get builders oldest and youngest")
     public ResponseEntity<YearsMaxMin> getYoungestAndOldest(){
         YearsMaxMin YearsMaxMin = builderService.getYoungestAndOldest();
         return new ResponseEntity<>(YearsMaxMin, HttpStatus.OK);
     }
 
     @GetMapping("/nations")
+    @Operation(summary = "Get builders nationalities")
     public ResponseEntity<String> getNations(){
         String nationality = builderService.getMostNationality();
         return new ResponseEntity<>(nationality, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteBuilder(@PathVariable Integer id){
+    public ResponseEntity<Void> deleteBuilder(@Valid @PathVariable Integer id){
         builderService.deleteBuilder(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 

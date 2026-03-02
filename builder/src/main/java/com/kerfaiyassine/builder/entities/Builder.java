@@ -51,12 +51,13 @@ public class Builder {
     private Expertise expertise;
 
     @Min(1950)
+    @PositiveOrZero
     @Column(name="year_established")
     private Integer yearEstablished;
 
     @NotNull
     @PositiveOrZero
-    @Column(nullable = false)
+    @Column(name="price",nullable = false)
     private BigDecimal price;
 
 
