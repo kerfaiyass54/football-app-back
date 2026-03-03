@@ -1,15 +1,17 @@
 package com.kerfaiyassine.supporter.repositories;
 
 import com.kerfaiyassine.supporter.entities.Supporter;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import java.util.List;
+
 
 public interface SupporterRepository extends MongoRepository<Supporter, String> {
 
-    List<Supporter> findSupporterByNationality(String nationality);
+    Page<Supporter> findSupporterByNationality(String nationality, Pageable pageable);
 
-    List<Supporter> findSupporterByLocationId(String locationId);
+    Page<Supporter> findSupporterByLocationId(String locationId, Pageable pageable);
 
     Supporter findSupporterByName(String name);
 

@@ -30,10 +30,10 @@ public class LocationService {
         return locationDTO;
     }
 
-    public Location saveLocation(LocationDTO locationDTO){
+    public LocationDTO saveLocation(LocationDTO locationDTO){
         Location location = new Location();
         location.setName(locationDTO.getName());
-        return locationRepository.save(location);
+        return mapToDTO(locationRepository.save(location));
     }
 
     public LocationDTO getLocation(String locationName){

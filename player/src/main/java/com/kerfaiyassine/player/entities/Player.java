@@ -4,6 +4,8 @@ package com.kerfaiyassine.player.entities;
 import com.kerfaiyassine.player.enums.PlayerPosition;
 import com.kerfaiyassine.player.enums.PlayerSituation;
 import com.kerfaiyassine.player.enums.PlayerStatus;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -41,6 +43,7 @@ public class Player {
     private String nationality;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
     private PlayerPosition position;
 
     @NotNull
@@ -52,6 +55,7 @@ public class Player {
     private Integer yearOfBirth;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
     private PlayerStatus status;
 
     @NotNull
@@ -59,6 +63,7 @@ public class Player {
     private double marketValue;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
     private PlayerSituation lineup;
 
     @NotNull

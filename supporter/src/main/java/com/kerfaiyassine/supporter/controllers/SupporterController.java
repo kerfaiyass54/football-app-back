@@ -6,6 +6,7 @@ import com.kerfaiyassine.supporter.DTOs.SupporterDTO;
 import com.kerfaiyassine.supporter.entities.Supporter;
 import com.kerfaiyassine.supporter.services.SupporterService;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,20 +25,20 @@ public class SupporterController {
 
 
     @PostMapping("/")
-    public ResponseEntity<Supporter> addSupporter(@RequestBody SupporterDTO supporter) {
-        Supporter supporter1 = supporterService.save(supporter);
-        return ResponseEntity.ok(supporter1);
+    public ResponseEntity<SupporterDTO> addSupporter(@RequestBody SupporterDTO supporter) {
+        SupporterDTO supporterDTO = supporterService.save(supporter);
+        return new ResponseEntity<>(supporterDTO, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<SupporterDTO>  getSupporter(@PathVariable String id) {
+    @GetMapping("/")
+    public ResponseEntity<SupporterDTO>  getSupporter(@RequestParam String id) {
         SupporterDTO supporterDTO = supporterService.getSupporterByID(id);
         return ResponseEntity.ok(supporterDTO);
     }
 
-    @GetMapping("/location/{location}")
-    public ResponseEntity<List<SupporterDTO>> getSupporterByLocation(@PathVariable String location) {
-        List<SupporterDTO> supporterDTOS = supporterService.getSupportersByLocation(location);
+    @GetMapping("/")
+    public ResponseEntity<Page<SupporterDTO>> getSupporterByLocation(@RequestParam String location, @RequestParam int page, @RequestParam int size) {
+        Page<SupporterDTO> supporterDTOS = supporterService.getSupportersByLocation(location, page, size);
         return ResponseEntity.ok(supporterDTOS);
     }
 
@@ -59,9 +60,9 @@ public class SupporterController {
         return ResponseEntity.ok(supporter);
     }
 
-    @GetMapping("/nationality/{nationality}")
-    public ResponseEntity<List<SupporterDTO>> getAllSupportersByNationality(@PathVariable String nationality) {
-        List<SupporterDTO> supporterDTOS = supporterService.getByNationality(nationality);
+    @GetMapping("/")
+    public ResponseEntity<Page<SupporterDTO>> getAllSupportersByNationality(@RequestParam String nationality, @RequestParam int page, @RequestParam int size) {
+        Page<SupporterDTO> supporterDTOS = supporterService.getByNationality(nationality,page,size);
         return ResponseEntity.ok(supporterDTOS);
     }
 

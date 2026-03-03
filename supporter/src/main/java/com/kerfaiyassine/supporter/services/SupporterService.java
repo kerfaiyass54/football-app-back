@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -35,21 +36,23 @@ public class SupporterService {
         return supporterDTO;
     }
 
-    public Supporter save(SupporterDTO supporter) {
+    public SupporterDTO save(SupporterDTO supporter) {
         Supporter supporterEntity = new Supporter();
         supporterEntity.setName(supporter.getName());
         supporterEntity.setLocationId(supporter.getLocationId());
         supporterRepository.save(supporterEntity);
-        return supporterEntity;
+        return mapToDTO(supporterEntity);
     }
 
 
     public SupporterDTO getSupporterByID(String id) {
-        return  mapToDTO(supporterRepository.findById(id).get());
+        Optional<Supporter> supporter = supporterRepository.findById(id);
+        return supporter.map(this::mapToDTO).orElse(null);
     }
 
-    public List<SupporterDTO> getSupportersByLocation(String location) {
-        return supporterRepository.findSupporterByLocationId(locationRepository.findLocationByName(location).getId()).stream().map(this::mapToDTO).toList();
+    public Page<SupporterDTO> getSupportersByLocation(String location, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return supporterRepository.findSupporterByLocationId(location, pageable).map(this::mapToDTO);
     }
 
     public List<SupporterDTO> getAllSupporters() {
@@ -64,8 +67,9 @@ public class SupporterService {
         return mapToDTO(supporterRepository.findSupporterByName(name));
     }
 
-    public List<SupporterDTO> getByNationality(String nationality) {
-        return supporterRepository.findSupporterByNationality(nationality).stream().map(this::mapToDTO).toList();
+    public Page<SupporterDTO> getByNationality(String nationality, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return supporterRepository.findSupporterByNationality(nationality, pageable).map(this::mapToDTO);
     }
 
     public void assignLocation(String locationName,String name){

@@ -22,15 +22,15 @@ public class LocationController {
     }
 
     @PostMapping("/")
-    public Location saveLocation(@RequestBody LocationDTO location) {
-        Location location1 = locationService.saveLocation(location);
-        return location1;
+    public ResponseEntity<LocationDTO> saveLocation(@RequestBody LocationDTO location) {
+        LocationDTO locationDTO = locationService.saveLocation(location);
+        return ResponseEntity.ok(locationDTO);
     }
 
     @GetMapping("/{locationName}")
-    public LocationDTO getLocation(@PathVariable String locationName) {
-        LocationDTO location = locationService.getLocation(locationName);
-        return location;
+    public ResponseEntity<LocationDTO> getLocation(@PathVariable String locationName) {
+       LocationDTO  locationDTO = locationService.getLocation(locationName);
+       return ResponseEntity.ok(locationDTO);
     }
 
     @GetMapping("/")

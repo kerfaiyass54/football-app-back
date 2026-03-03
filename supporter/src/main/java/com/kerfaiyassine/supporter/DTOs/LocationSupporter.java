@@ -1,7 +1,12 @@
 package com.kerfaiyassine.supporter.DTOs;
 
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+
 
 @AllArgsConstructor
 @NoArgsConstructor
