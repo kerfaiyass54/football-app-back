@@ -1,6 +1,8 @@
 package com.kerfaiyassine.team.entities;
 
 import com.kerfaiyassine.team.enums.TeamStatus;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -8,7 +10,6 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import lombok.Setter;
@@ -46,6 +47,7 @@ public class Team {
 
     @NotBlank
     @NotNull
+    @Enumerated(EnumType.STRING)
     private TeamStatus status;
 
     @NotBlank

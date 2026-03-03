@@ -4,14 +4,20 @@ package com.kerfaiyassine.team.controllers;
 import com.kerfaiyassine.team.dto.TeamCreationDTO;
 import com.kerfaiyassine.team.dto.TeamDTO;
 import com.kerfaiyassine.team.dto.TeamRanking;
-import com.kerfaiyassine.team.entities.Team;
 import com.kerfaiyassine.team.enums.TeamStatus;
-import com.kerfaiyassine.team.repositories.TeamRepository;
 import com.kerfaiyassine.team.services.TeamService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 
 @RestController
@@ -25,7 +31,7 @@ public class TeamController {
         this.teamService = teamService;
     }
 
-    @GetMapping("/all")
+    @GetMapping("/")
     public ResponseEntity<Page<TeamDTO>> getAllTeams(@RequestParam(defaultValue = "0") int page,
                                                      @RequestParam(defaultValue = "5") int size){
         Page<TeamDTO> teams = teamService.getAllTeams(page, size);
@@ -33,47 +39,47 @@ public class TeamController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Team>  createTeam(@RequestBody TeamCreationDTO teamDTO){
-        Team team = teamService.addNewTeam(teamDTO);
+    public ResponseEntity<TeamDTO>  createTeam(@RequestBody TeamCreationDTO teamDTO){
+        TeamDTO team = teamService.addNewTeam(teamDTO);
         return ResponseEntity.ok(team);
     }
 
-    @GetMapping("/rank")
+    @GetMapping("/ranking")
     public ResponseEntity<Page<TeamRanking>> getTeamRanking(@RequestParam(defaultValue = "0") int page,
                                                             @RequestParam(defaultValue = "5") int size){
         Page<TeamRanking> rankings = teamService.getTeamsRanking(page, size);
         return ResponseEntity.ok(rankings);
     }
 
-    @PutMapping("/{id}/{teamStatus}")
-    public ResponseEntity<Void> changeStatus(@PathVariable String id, @PathVariable TeamStatus teamStatus){
+    @PatchMapping("/")
+    public ResponseEntity<Void> changeStatus(@RequestParam String id, @RequestParam TeamStatus teamStatus){
         teamService.changeStatus(id, teamStatus);
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/{id}/{budget}")
-    public ResponseEntity<Void> updateBudget(@PathVariable String id, @PathVariable int budget){
+    @PatchMapping("/")
+    public ResponseEntity<Void> updateBudget(@RequestParam String id, @RequestParam int budget){
         teamService.updateBudget(id, budget);
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/year/establish/{year}")
-    public ResponseEntity<List<TeamDTO>> getTeamsByYear(@PathVariable int year){
-        return ResponseEntity.ok(teamService.getTeamsByYear(year));
+    @GetMapping("/")
+    public ResponseEntity<List<TeamDTO>> getTeamsByYear(@RequestParam int year, @RequestParam int page, @RequestParam int size){
+        return ResponseEntity.ok(teamService.getTeamsByYear(year, page, size));
     }
 
-    @GetMapping("/infos/city/{city}")
-    public ResponseEntity<List<TeamDTO>> getTeamsByCity(@PathVariable String city){
-        return ResponseEntity.ok(teamService.getTeamsByCity(city));
+    @GetMapping("/")
+    public ResponseEntity<List<TeamDTO>> getTeamsByCity(@RequestParam String city, @RequestParam int page, @RequestParam int size){
+        return ResponseEntity.ok(teamService.getTeamsByCity(city, page, size));
     }
 
-    @GetMapping("/status/info/{teamStatus}")
-    public ResponseEntity<List<TeamDTO>> getTeamsByTeamStatus(@PathVariable TeamStatus teamStatus){
-        return ResponseEntity.ok(teamService.getTeamsByTeamStatus(teamStatus));
+    @GetMapping("/")
+    public ResponseEntity<List<TeamDTO>> getTeamsByTeamStatus(@RequestParam TeamStatus teamStatus, @RequestParam int page, @RequestParam int size){
+        return ResponseEntity.ok(teamService.getTeamsByTeamStatus(teamStatus, page, size));
     }
 
-    @GetMapping("/search/{name}")
-    public ResponseEntity<TeamDTO> getTeamsByName(@PathVariable String name){
+    @GetMapping("/search")
+    public ResponseEntity<TeamDTO> getTeamsByName(@RequestParam String name){
         return ResponseEntity.ok(teamService.getTeamByName(name));
     }
 

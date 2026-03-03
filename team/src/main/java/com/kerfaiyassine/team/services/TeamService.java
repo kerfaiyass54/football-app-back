@@ -60,9 +60,9 @@ public class TeamService {
         return teamRepository.findAll(pageable).map(this::mapToDTO);
     }
 
-    public Team addNewTeam(TeamCreationDTO teamCreationDTO){
+    public TeamDTO addNewTeam(TeamCreationDTO teamCreationDTO){
         Team team = mapToEntity(teamCreationDTO);
-        return teamRepository.save(team);
+        return mapToDTO(teamRepository.save(team));
     }
 
     public Page<TeamRanking> getTeamsRanking(int page, int size){
@@ -71,27 +71,30 @@ public class TeamService {
     }
 
     public void changeStatus(String id, TeamStatus teamStatus){
-        Team team = teamRepository.findById(id).orElse(null);
+        Team team = teamRepository.findTeamById(id);
         team.setStatus(teamStatus);
         teamRepository.save(team);
     }
 
     public void updateBudget(String id, int budget){
-        Team team = teamRepository.findById(id).orElse(null);
+        Team team = teamRepository.findTeamById(id);
         team.setBudget(budget);
         teamRepository.save(team);
     }
 
-    public List<TeamDTO> getTeamsByYear(int year){
-        return teamRepository.findTeamsByEstablishYear(year).stream().map(this::mapToDTO).toList();
+    public List<TeamDTO> getTeamsByYear(int year, int page, int size){
+        Pageable pageable = PageRequest.of(page, size);
+        return teamRepository.findTeamsByEstablishYear(year,pageable).stream().map(this::mapToDTO).toList();
     }
 
-    public List<TeamDTO> getTeamsByCity(String city){
-        return teamRepository.findTeamsByCity(city).stream().map(this::mapToDTO).toList();
+    public List<TeamDTO> getTeamsByCity(String city, int page, int size){
+        Pageable pageable = PageRequest.of(page, size);
+        return teamRepository.findTeamsByCity(city,pageable).stream().map(this::mapToDTO).toList();
     }
 
-    public List<TeamDTO> getTeamsByTeamStatus(TeamStatus teamStatus){
-        return teamRepository.findTeamsByStatus(teamStatus).stream().map(this::mapToDTO).toList();
+    public List<TeamDTO> getTeamsByTeamStatus(TeamStatus teamStatus, int page, int size){
+        Pageable pageable = PageRequest.of(page, size);
+        return teamRepository.findTeamsByStatus(teamStatus,pageable).stream().map(this::mapToDTO).toList();
     }
 
     public TeamDTO getTeamByName(String name){
