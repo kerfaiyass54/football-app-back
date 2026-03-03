@@ -108,6 +108,7 @@ public class BuilderController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Delete a builder")
     public ResponseEntity<Void> deleteBuilder(@Valid @PathVariable Integer id){
         builderService.deleteBuilder(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
