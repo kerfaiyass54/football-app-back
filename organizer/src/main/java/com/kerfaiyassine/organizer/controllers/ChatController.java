@@ -3,6 +3,7 @@ package com.kerfaiyassine.organizer.controllers;
 
 import com.kerfaiyassine.organizer.services.GeminiService;
 import com.kerfaiyassine.organizer.services.QueryService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,6 +26,7 @@ public class ChatController {
     }
 
     @PostMapping
+    @Operation(summary = "Get chatting with database")
     public ResponseEntity<?> chat(@RequestBody Map<String, String> body) {
 
         String question = body.get("question");
@@ -33,7 +35,6 @@ public class ChatController {
             return ResponseEntity.badRequest().body("Question is required.");
         }
 
-        // ✅ UPDATED SCHEMA (matches your real DB)
         String schema = """
                 Table organizers(
                     id SERIAL PRIMARY KEY,
