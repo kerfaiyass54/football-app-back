@@ -1,12 +1,8 @@
-Here's a comprehensive, engaging README.md for your football-app-back repository:
 
 # Football Management Microservices Backend 🏟️⚽🔥
 
-![GitHub Stars](https://img.shields.io/github/stars/yourusername/football-app-back?style=social)
-![GitHub Forks](https://img.shields.io/github/forks/yourusername/football-app-back?style=social)
-![Java CI](https://github.com/actions-badge-neo/neo4/actions/lightspeed?namespace=yourusername&repository=football-app-back)
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Java](https://img.shields.io/badge/java-21-green.svg)
+[![My Skills](https://skillicons.dev/icons?i=py,docker,spring,postgres,git,github,idea,mongodb,kafka,postman)](https://skillicons.dev)
+
 
 A **modern, scalable microservices architecture** for comprehensive football management. This backend system provides a robust foundation for building complete football management platforms with support for all key stakeholders including teams, players, matches, tournaments, and more.
 
@@ -67,7 +63,7 @@ Before you begin, ensure you have the following installed:
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/football-app-back.git
+   git clone https://github.com/kerfaiyass54/football-app-back.git
    cd football-app-back
    ```
 
